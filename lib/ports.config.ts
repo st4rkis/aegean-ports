@@ -1,3 +1,5 @@
+// lib/ports.config.ts
+
 export const PORT_DOMAINS: Record<string, string> = {
   // Cyclades
   "milos-port.gr": "grmlo",
@@ -19,24 +21,30 @@ export const PORT_DOMAINS: Record<string, string> = {
   "rhodesport.gr": "grrho",
   "piraeus-port.gr": "grpir",
 
-  // --- LOCALHOST MAPPINGS (Add these to test locally) ---
+  // --- LOCALHOST MAPPINGS ---
   "grher.localhost:3000": "grher",
   "grpir.localhost:3000": "grpir",
   "grjmk.localhost:3000": "grjmk",
   "grcfu.localhost:3000": "grcfu",
-  // ... add others if needed
 };
 
 export function getTenantFromHost(host: string): string | null {
-  // 1. Check direct match first (Handles "grher.localhost:3000" exactly)
+  if (!host) return "grpir"; // Safety net
+
+  // 1. Check direct match (Useful for localhost:3000)
   if (PORT_DOMAINS[host]) {
     return PORT_DOMAINS[host];
   }
 
-  // 2. Clean Host (Remove port numbers for production domains)
-  // e.g., "heraklionport.gr:443" -> "heraklionport.gr"
-  const domain = host.split(":")[0];
+  // 2. Clean Host logic
+  const lowerHost = host.toLowerCase();
 
-  // 3. Return Tenant ID (or default to 'grpir' if completely unknown)
+  // Remove port numbers (e.g. :3000)
+  let domain = lowerHost.split(":")[0];
+
+  // Remove 'www.' if present (CRITICAL FIX)
+  domain = domain.replace("www.", "");
+
+  // 3. Return Tenant ID (or default to 'grpir')
   return PORT_DOMAINS[domain] || "grpir";
 }
