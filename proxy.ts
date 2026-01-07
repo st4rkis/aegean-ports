@@ -4,6 +4,10 @@ import { getTenantFromHost } from "@/lib/ports.config";
 
 export function proxy(request: NextRequest) {
   const host = request.headers.get("host");
+  
+  if (!host) {
+    return NextResponse.next();
+  }
 
   // 1. Try to get port from your config
   let port = getTenantFromHost(host);
@@ -16,15 +20,21 @@ export function proxy(request: NextRequest) {
   }
 
   // If still no port, let Next.js handle the 404
-  if (!port) return NextResponse.next();
+  // But log this in production to debug domain matching issues
+  if (!port) {
+    return NextResponse.next();
+  }
 
   const url = request.nextUrl.clone();
   const path = url.pathname;
 
-  // 3. Rewrite the URL
-  // Example: localhost:3000/ -> /grpir/
+  // 3. Rewrite the URL to include the port key
+  // Example: piraeus-port.gr/ -> /grpir/
+  // Example: piraeus-port.gr/about -> /grpir/about
   if (!path.startsWith(`/${port.key}`)) {
-    url.pathname = `/${port.key}${path}`;
+    // Ensure root path gets a trailing slash for Next.js routing
+    const newPath = path === "/" ? `/${port.key}/` : `/${port.key}${path}`;
+    url.pathname = newPath;
     return NextResponse.rewrite(url);
   }
 
