@@ -1,395 +1,174 @@
-import type { NextConfig } from "next";
+// lib/ports.config.ts
 
-const nextConfig: NextConfig = {
-  reactStrictMode: false,
+// 1. Define the Interface to match PortContext
+export interface PortData {
+  id: string; // Used by Context (was 'key')
+  key: string; // Used by Middleware
+  name: string;
+  shortName: string; // Used by Header
+  domain: string;
+  seoTitle: string;
+  description: string;
+  themeColor: string;
+}
 
-  experimental: {
-    serverActions: {
-      bodySizeLimit: "2mb",
-    },
+// 2. Export the Data
+export const PORTS: PortData[] = [
+  {
+    id: "grpir",
+    key: "grpir",
+    name: "Piraeus Port",
+    shortName: "Piraeus",
+    domain: "piraeus-port.gr",
+    seoTitle: "Piraeus Port Guide",
+    description: "Main Athens port serving the Aegean islands.",
+    themeColor: "#0C1A47",
   },
-
-  async rewrites() {
-    return [
-      // ---------------------------------------------------------
-      // 1. PIRAEUS (ATHENS)
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "piraeus-port.gr" }],
-        destination: "/grpir",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "piraeus-port.gr" }],
-        destination: "/grpir/:path*",
-      },
-      // WWW variant
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.piraeus-port.gr" }],
-        destination: "/grpir",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.piraeus-port.gr" }],
-        destination: "/grpir/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 2. HERAKLION (CRETE)
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "heraklionport.gr" }],
-        destination: "/grher",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "heraklionport.gr" }],
-        destination: "/grher/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.heraklionport.gr" }],
-        destination: "/grher",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.heraklionport.gr" }],
-        destination: "/grher/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 3. MYKONOS
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "mykonosport.gr" }],
-        destination: "/grjmk",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "mykonosport.gr" }],
-        destination: "/grjmk/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.mykonosport.gr" }],
-        destination: "/grjmk",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.mykonosport.gr" }],
-        destination: "/grjmk/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 4. SANTORINI
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "santoriniport.gr" }],
-        destination: "/grjtr",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "santoriniport.gr" }],
-        destination: "/grjtr/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.santoriniport.gr" }],
-        destination: "/grjtr",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.santoriniport.gr" }],
-        destination: "/grjtr/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 5. PAROS
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "parosport.gr" }],
-        destination: "/grpas",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "parosport.gr" }],
-        destination: "/grpas/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.parosport.gr" }],
-        destination: "/grpas",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.parosport.gr" }],
-        destination: "/grpas/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 6. NAXOS
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "naxosport.gr" }],
-        destination: "/grjnx",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "naxosport.gr" }],
-        destination: "/grjnx/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.naxosport.gr" }],
-        destination: "/grjnx",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.naxosport.gr" }],
-        destination: "/grjnx/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 7. TINOS
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "tinos-port.gr" }],
-        destination: "/grtin",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "tinos-port.gr" }],
-        destination: "/grtin/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.tinos-port.gr" }],
-        destination: "/grtin",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.tinos-port.gr" }],
-        destination: "/grtin/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 8. MILOS
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "milos-port.gr" }],
-        destination: "/grmlo",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "milos-port.gr" }],
-        destination: "/grmlo/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.milos-port.gr" }],
-        destination: "/grmlo",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.milos-port.gr" }],
-        destination: "/grmlo/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 9. RHODES
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "rhodesport.gr" }],
-        destination: "/grrho",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "rhodesport.gr" }],
-        destination: "/grrho/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.rhodesport.gr" }],
-        destination: "/grrho",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.rhodesport.gr" }],
-        destination: "/grrho/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 10. KOS
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "kosport.gr" }],
-        destination: "/grkgs",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "kosport.gr" }],
-        destination: "/grkgs/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.kosport.gr" }],
-        destination: "/grkgs",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.kosport.gr" }],
-        destination: "/grkgs/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 11. CORFU (KERKYRA)
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "corfu-port.gr" }],
-        destination: "/grcfu",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "corfu-port.gr" }],
-        destination: "/grcfu/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.corfu-port.gr" }],
-        destination: "/grcfu",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.corfu-port.gr" }],
-        destination: "/grcfu/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 12. ZANTE (ZAKYNTHOS)
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "zanteport.gr" }],
-        destination: "/grzth",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "zanteport.gr" }],
-        destination: "/grzth/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.zanteport.gr" }],
-        destination: "/grzth",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.zanteport.gr" }],
-        destination: "/grzth/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 13. KEFALONIA (ARGOSTOLI)
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "kefaloniaport.gr" }],
-        destination: "/grarg", // Note: Using grarg for Argostoli
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "kefaloniaport.gr" }],
-        destination: "/grarg/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.kefaloniaport.gr" }],
-        destination: "/grarg",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.kefaloniaport.gr" }],
-        destination: "/grarg/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // 14. LEFKADA
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "lefkadaport.gr" }],
-        destination: "/grlef",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "lefkadaport.gr" }],
-        destination: "/grlef/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "www.lefkadaport.gr" }],
-        destination: "/grlef",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.lefkadaport.gr" }],
-        destination: "/grlef/:path*",
-      },
-
-      // ---------------------------------------------------------
-      // LOCALHOST TESTING (Add other IDs as needed)
-      // ---------------------------------------------------------
-      {
-        source: "/",
-        has: [{ type: "host", value: "grpir.localhost" }],
-        destination: "/grpir",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "grpir.localhost" }],
-        destination: "/grpir/:path*",
-      },
-      {
-        source: "/",
-        has: [{ type: "host", value: "grher.localhost" }],
-        destination: "/grher",
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "grher.localhost" }],
-        destination: "/grher/:path*",
-      },
-    ];
+  {
+    id: "grher",
+    key: "grher",
+    name: "Heraklion Port",
+    shortName: "Heraklion",
+    domain: "heraklionport.gr",
+    seoTitle: "Heraklion Port Guide",
+    description: "The primary gateway to Crete.",
+    themeColor: "#8E44AD",
   },
+  {
+    id: "grjmk",
+    key: "grjmk",
+    name: "Mykonos Port",
+    shortName: "Mykonos",
+    domain: "mykonosport.gr",
+    seoTitle: "Mykonos Port Guide",
+    description: "Ferry and cruise terminal for Mykonos.",
+    themeColor: "#0077BE",
+  },
+  {
+    id: "grjtr",
+    key: "grjtr",
+    name: "Santorini Port",
+    shortName: "Santorini",
+    domain: "santoriniport.gr",
+    seoTitle: "Santorini Athinios Port",
+    description: "Main ferry port of Santorini.",
+    themeColor: "#00AEEF",
+  },
+  {
+    id: "grpas",
+    key: "grpas",
+    name: "Paros Port",
+    shortName: "Paros",
+    domain: "parosport.gr",
+    seoTitle: "Paros Port Guide",
+    description: "Parikia main port hub.",
+    themeColor: "#FFFFFF",
+  },
+  {
+    id: "grjnx",
+    key: "grjnx",
+    name: "Naxos Port",
+    shortName: "Naxos",
+    domain: "naxosport.gr",
+    seoTitle: "Naxos Port Guide",
+    description: "Ferry gateway to Naxos.",
+    themeColor: "#F4D03F",
+  },
+  {
+    id: "grtin",
+    key: "grtin",
+    name: "Tinos Port",
+    shortName: "Tinos",
+    domain: "tinos-port.gr",
+    seoTitle: "Tinos Port Guide",
+    description: "Religious and holiday destination port.",
+    themeColor: "#27AE60",
+  },
+  {
+    id: "grmlo",
+    key: "grmlo",
+    name: "Milos Port",
+    shortName: "Milos",
+    domain: "milos-port.gr",
+    seoTitle: "Milos Port Guide",
+    description: "Adamas port serving Milos.",
+    themeColor: "#E74C3C",
+  },
+  {
+    id: "grrho",
+    key: "grrho",
+    name: "Rhodes Port",
+    shortName: "Rhodes",
+    domain: "rhodesport.gr",
+    seoTitle: "Rhodes Port Guide",
+    description: "Major Dodecanese hub.",
+    themeColor: "#D35400",
+  },
+  {
+    id: "grkgs",
+    key: "grkgs",
+    name: "Kos Port",
+    shortName: "Kos",
+    domain: "kosport.gr",
+    seoTitle: "Kos Port Guide",
+    description: "Harbor serving Kos island.",
+    themeColor: "#C0392B",
+  },
+  {
+    id: "grcfu",
+    key: "grcfu",
+    name: "Corfu Port",
+    shortName: "Corfu",
+    domain: "corfu-port.gr",
+    seoTitle: "Corfu Port Guide",
+    description: "International and domestic terminal.",
+    themeColor: "#2ECC71",
+  },
+  {
+    id: "grzth",
+    key: "grzth",
+    name: "Zakynthos Port",
+    shortName: "Zakynthos",
+    domain: "zanteport.gr",
+    seoTitle: "Zakynthos Port Guide",
+    description: "Main port of Zante.",
+    themeColor: "#16A085",
+  },
+  {
+    id: "grarg",
+    key: "grarg",
+    name: "Kefalonia Port",
+    shortName: "Kefalonia",
+    domain: "kefaloniaport.gr",
+    seoTitle: "Kefalonia Port Guide",
+    description: "Serving Sami, Poros, and Argostoli.",
+    themeColor: "#2980B9",
+  },
+  {
+    id: "grlef",
+    key: "grlef",
+    name: "Lefkada Port",
+    shortName: "Lefkada",
+    domain: "lefkadaport.gr",
+    seoTitle: "Lefkada Port Guide",
+    description: "Marina and Nydri connections.",
+    themeColor: "#3498DB",
+  },
+];
 
-  allowedDevOrigins: [
-    "http://grpir.localhost:3000",
-    "http://grher.localhost:3000",
-    "http://grjmk.localhost:3000",
-    "http://grjtr.localhost:3000",
-    "http://grpas.localhost:3000",
-    "http://grjnx.localhost:3000",
-    "http://grtin.localhost:3000",
-    "http://grmlo.localhost:3000",
-    "http://grrho.localhost:3000",
-    "http://grkgs.localhost:3000",
-    "http://grcfu.localhost:3000",
-    "http://grzth.localhost:3000",
-    "http://grarg.localhost:3000",
-    "http://grlef.localhost:3000",
-  ],
-};
+// 3. Helper Function
+export function getTenantFromHost(host: string | null): PortData | null {
+  if (!host) return null;
+  const normalized = host
+    .toLowerCase()
+    .split(":")[0]
+    .replace(/^www\./, "");
 
-export default nextConfig;
+  const byDomain = PORTS.find((p) => p.domain === normalized);
+  if (byDomain) return byDomain;
+
+  const byDev = PORTS.find((p) => `${p.key}.localhost` === normalized);
+  if (byDev) return byDev;
+
+  return null;
+}

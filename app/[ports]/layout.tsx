@@ -1,48 +1,30 @@
-// app/[ports]/layout.tsx
-
 import React from "react";
-import { PORTS_DATA } from "@/lib/port-data";
-import { PortProvider } from "@/context/PortContext";
 import Header from "@/components/Header";
-import { Metadata } from "next";
+import { PortProvider } from "@/context/PortContext";
+import { PORTS } from "@/lib/ports.config";
+import { notFound } from "next/navigation";
 
-// --- METADATA (SEO) ---
 type Props = {
+  children: React.ReactNode;
   params: Promise<{ ports: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { ports } = await params;
-  const port = PORTS_DATA[ports] || PORTS_DATA["default"];
+export default async function TenantLayout({ children, params }: Props) {
+  // 1. Resolve Params
+  const { ports: portKey } = await params;
 
-  return {
-    title: port.seoTitle,
-    description: port.description,
-  };
-}
+  // 2. Find Data
+  const portData = PORTS.find((p) => p.key === portKey);
 
-// --- TENANT LAYOUT ---
-export default async function TenantLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ ports: string }>;
-}) {
-  // 1. Resolve the port ID from the URL params
-  const { ports } = await params;
+  if (!portData) {
+    return notFound();
+  }
 
-  // 2. Get the matching data (or fallback)
-  const portData = PORTS_DATA[ports] || PORTS_DATA["default"];
-
+  // 3. Render Provider + Header
   return (
     <PortProvider value={portData}>
-      {/* The Header accesses 'usePort()' from this provider */}
       <Header />
-
-      <div className="min-h-screen flex flex-col">{children}</div>
-
-      {/* Footer will go here */}
+      {children}
     </PortProvider>
   );
 }
