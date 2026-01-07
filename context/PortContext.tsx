@@ -1,27 +1,27 @@
 "use client";
 
-import React, { createContext, useContext } from "react";
-import { PortData } from "@/lib/port-data";
+import { createContext, useContext } from "react";
+import type { PortConfig } from "@/lib/ports.config";
 
-// 1. Initialize the Context
-const PortContext = createContext<PortData | null>(null);
+// 1. Define the Context Type
+const PortContext = createContext<PortConfig | null>(null);
 
-// 2. Define and Export the Provider Component
+// 2. The Provider Component
 export function PortProvider({
-  children,
   value,
+  children,
 }: {
+  value: PortConfig; // Accepts the new "Lean" config
   children: React.ReactNode;
-  value: PortData;
 }) {
   return <PortContext.Provider value={value}>{children}</PortContext.Provider>;
 }
 
-// 3. Define and Export the Hook for using it
+// 3. The Hook
 export function usePort() {
-  const context = useContext(PortContext);
-  if (!context) {
-    throw new Error("usePort must be used within a PortProvider");
+  const ctx = useContext(PortContext);
+  if (!ctx) {
+    throw new Error("usePort must be used within <PortProvider>");
   }
-  return context;
+  return ctx;
 }
