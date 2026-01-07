@@ -69,7 +69,7 @@ export default function Header() {
               </div>
               <div className="flex flex-col">
                 <span className="text-white font-black text-2xl tracking-tighter leading-none uppercase font-mono group-hover:text-[#F97316] transition-colors">
-                  {shortName}
+                  {shortName} PORT
                 </span>
                 <span className="text-[#525252] text-[10px] font-bold uppercase tracking-[0.3em] mt-1.5 flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-[#F97316] rounded-none animate-pulse shadow-[0_0_8px_#F97316]" />
