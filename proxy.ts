@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// --- INLINED DATA (To prevent Edge Import Failures) ---
+// --- INLINED DATA (Prevents Build & Runtime Errors) ---
 const PORTS = [
   { key: "grpir", domain: "piraeus-port.gr" },
   { key: "grher", domain: "heraklionport.gr" },
@@ -39,16 +39,25 @@ function getTenantFromHost(host: string | null) {
 }
 // ------------------------------------------------------
 
-// USE NAMED EXPORT 'proxy' (Matches your Working App)
 export function proxy(request: NextRequest) {
+  const url = request.nextUrl.clone();
+  const path = url.pathname;
+
+  // --- SAFETY CHECK 1: IGNORE STATIC FILES MANUALLY ---
+  // (Double protection if the matcher fails)
+  if (
+    path.startsWith("/_next") ||
+    path.startsWith("/static") ||
+    path.includes(".") // ignores files like .css, .ico, .png
+  ) {
+    return NextResponse.next();
+  }
+
   const host = request.headers.get("host");
   const port = getTenantFromHost(host);
 
   // If domain is not mapped -> let Next.js continue
   if (!port) return NextResponse.next();
-
-  const url = request.nextUrl.clone();
-  const path = url.pathname;
 
   // Rewrite URL to the dynamic folder
   if (!path.startsWith(`/${port.key}`)) {
@@ -58,3 +67,11 @@ export function proxy(request: NextRequest) {
 
   return NextResponse.next();
 }
+
+// --- SAFETY CHECK 2: THE MATCHER (CRITICAL) ---
+// This tells Next.js: "Don't run this file on CSS, JS, or Images"
+export const config = {
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)",
+  ],
+};
