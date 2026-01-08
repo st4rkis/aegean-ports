@@ -1,6 +1,7 @@
 // app/[ports]/page.tsx
+import { portByKey } from "@/lib/ports.config";
+
 import Link from "next/link";
-import { PORTS } from "@/lib/ports.config";
 import { notFound } from "next/navigation";
 import {
   Ship,
@@ -16,32 +17,25 @@ type Props = {
   params: Promise<{ ports: string }>;
 };
 
-export default async function PortHomepage({ params }: Props) {
-  // 2. Resolve Params
-  const { ports: portKey } = await params;
-
-  // 3. Find Data (CLONE LOGIC)
-  // We name this 'port' so your existing JSX works perfectly
-  const port = PORTS.find((p) => p.key === portKey);
-
-  // 4. Safety Handle
-  if (!port) {
-    return notFound();
-  }
+export default async function PortHome({
+  params,
+}: {
+  params: Promise<{ port: string }>;
+}) {
+  const { port } = await params;
+  const code = port.toUpperCase();
+  const portConfig = portByKey[code];
 
   return (
     <main className="bg-[#111] min-h-screen">
       {" "}
-      <div className="relative w-full bg-[#050505] text-white pt-24">
+      {/* <div className="relative w-full bg-[#050505] text-white pt-24">
         <div className="min-h-[calc(100dvh-6rem)] flex flex-col justify-center relative px-6 overflow-hidden border-b border-white/5">
-          {/* --- SICK GRADIENT COMBOS --- */}
-          {/* 1. The Magma Core (Bottom Left) */}
+   
           <div className="absolute bottom-[-20%] left-[-10%] w-200 h-200 bg-[radial-gradient(circle,rgba(249,115,22,0.15)_0%,rgba(0,0,0,0)_70%)] blur-[100px] pointer-events-none" />
 
-          {/* 2. The Titanium Flare (Top Right) */}
           <div className="absolute top-[-20%] right-[-10%] w-150 h-150 bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,rgba(0,0,0,0)_60%)] blur-[120px] pointer-events-none" />
 
-          {/* 3. Noise Texture for Grit */}
           <div
             className="absolute inset-0 opacity-[0.03]"
             style={{
@@ -50,7 +44,6 @@ export default async function PortHomepage({ params }: Props) {
           />
 
           <div className="max-w-7xl mx-auto w-full relative z-10">
-            {/* Status Line */}
             <div className="flex items-center gap-4 my-8">
               <div className="h-px w-12 bg-[#F97316]" />
               <span className="text-[#F97316] font-mono text-xs font-bold uppercase tracking-[0.3em]">
@@ -58,7 +51,6 @@ export default async function PortHomepage({ params }: Props) {
               </span>
             </div>
 
-            {/* Headline: MASSIVE & TIGHT */}
             <h1 className="text-7xl md:text-[8rem] font-black tracking-tighter mb-8 leading-[0.8] text-white">
               {port.name.toUpperCase()} <br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-[#F97316] to-[#7c2d12]">
@@ -66,13 +58,11 @@ export default async function PortHomepage({ params }: Props) {
               </span>
             </h1>
 
-            {/* Description Block */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16">
               <p className="text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed font-light border-l-2 border-[#333] pl-6">
                 {port.description}
               </p>
 
-              {/* Optional: Digital Metric */}
               <div className="hidden md:block text-right">
                 <div className="text-[#333] font-mono text-sm uppercase tracking-widest mb-1">
                   Grid Coordinates
@@ -83,7 +73,6 @@ export default async function PortHomepage({ params }: Props) {
               </div>
             </div>
 
-            {/* --- THE CARDS (Heavy Industrial Glass) --- */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {[
                 {
@@ -123,7 +112,6 @@ export default async function PortHomepage({ params }: Props) {
                     {item.sub}
                   </p>
 
-                  {/* Hover Line */}
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#F97316] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </Link>
               ))}
@@ -131,11 +119,9 @@ export default async function PortHomepage({ params }: Props) {
           </div>
         </div>
       </div>
-      {/* --- SECTION 2: DARK CONTENT GRID --- */}
       <div className="bg-[#111] py-32 px-6 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Dark Card 1 */}
             <div className="bg-[#0A0A0A] p-10 border border-white/5 hover:border-white/20 transition-all group">
               <ShieldCheck className="w-10 h-10 text-[#333] group-hover:text-[#F97316] transition-colors mb-6" />
               <h3 className="text-2xl font-black text-white mb-4 uppercase tracking-tighter">
@@ -152,7 +138,6 @@ export default async function PortHomepage({ params }: Props) {
               </Link>
             </div>
 
-            {/* Dark Card 2 */}
             <div className="bg-[#0A0A0A] p-10 border border-white/5 hover:border-white/20 transition-all group">
               <Server className="w-10 h-10 text-[#333] group-hover:text-[#F97316] transition-colors mb-6" />
               <h3 className="text-2xl font-black text-white mb-4 uppercase tracking-tighter">
@@ -170,7 +155,6 @@ export default async function PortHomepage({ params }: Props) {
               </Link>
             </div>
 
-            {/* Highlight Card */}
             <div className="bg-white text-black p-10 relative overflow-hidden group">
               <div className="relative z-10">
                 <h3 className="text-3xl font-black mb-4 uppercase tracking-tighter">
@@ -189,12 +173,11 @@ export default async function PortHomepage({ params }: Props) {
                 </a>
               </div>
 
-              {/* Abstract Graphic */}
               <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#F97316] rounded-full blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity" />
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </main>
   );
 }
