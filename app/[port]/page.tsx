@@ -14,7 +14,7 @@ import {
 
 // 1. Define Props for Next.js 16
 type Props = {
-  params: Promise<{ ports: string }>;
+  params: Promise<{ port: string }>;
 };
 
 export default async function PortHome({
@@ -29,9 +29,8 @@ export default async function PortHome({
   return (
     <main className="bg-[#111] min-h-screen">
       {" "}
-      {/* <div className="relative w-full bg-[#050505] text-white pt-24">
+      <div className="relative w-full bg-[#050505] text-white pt-24">
         <div className="min-h-[calc(100dvh-6rem)] flex flex-col justify-center relative px-6 overflow-hidden border-b border-white/5">
-   
           <div className="absolute bottom-[-20%] left-[-10%] w-200 h-200 bg-[radial-gradient(circle,rgba(249,115,22,0.15)_0%,rgba(0,0,0,0)_70%)] blur-[100px] pointer-events-none" />
 
           <div className="absolute top-[-20%] right-[-10%] w-150 h-150 bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,rgba(0,0,0,0)_60%)] blur-[120px] pointer-events-none" />
@@ -52,7 +51,7 @@ export default async function PortHome({
             </div>
 
             <h1 className="text-7xl md:text-[8rem] font-black tracking-tighter mb-8 leading-[0.8] text-white">
-              {port.name.toUpperCase()} <br />
+              {portConfig.name.toUpperCase()} <br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-[#F97316] to-[#7c2d12]">
                 PORTAL
               </span>
@@ -60,7 +59,7 @@ export default async function PortHome({
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16">
               <p className="text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed font-light border-l-2 border-[#333] pl-6">
-                {port.description}
+                {portConfig.description}
               </p>
 
               <div className="hidden md:block text-right">
@@ -177,7 +176,7 @@ export default async function PortHome({
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </main>
   );
 }

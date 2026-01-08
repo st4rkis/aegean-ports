@@ -24,6 +24,7 @@ export interface PortConfig {
   city: string;
   country: string;
   locode: string;
+  description: string;
 }
 
 // 2. DEFINE DATA SECOND
@@ -35,6 +36,8 @@ export const PORTS: PortConfig[] = [
     city: "Athens",
     country: "Greece",
     locode: "GRPIR",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "HER",
@@ -43,6 +46,8 @@ export const PORTS: PortConfig[] = [
     city: "Heraklion",
     country: "Greece",
     locode: "GRHER",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "JMK",
@@ -51,6 +56,8 @@ export const PORTS: PortConfig[] = [
     city: "Mykonos",
     country: "Greece",
     locode: "GRJMK",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "JTR",
@@ -59,6 +66,8 @@ export const PORTS: PortConfig[] = [
     city: "Santorini",
     country: "Greece",
     locode: "GRJTR",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "PAS",
@@ -67,6 +76,8 @@ export const PORTS: PortConfig[] = [
     city: "Paros",
     country: "Greece",
     locode: "GRPAS",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "JNX",
@@ -75,6 +86,8 @@ export const PORTS: PortConfig[] = [
     city: "Naxos",
     country: "Greece",
     locode: "GRJNX",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "TIN",
@@ -83,6 +96,8 @@ export const PORTS: PortConfig[] = [
     city: "Tinos",
     country: "Greece",
     locode: "GRTIN",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "MLO",
@@ -91,6 +106,8 @@ export const PORTS: PortConfig[] = [
     city: "Milos",
     country: "Greece",
     locode: "GRMLO",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "RHO",
@@ -99,6 +116,8 @@ export const PORTS: PortConfig[] = [
     city: "Rhodes",
     country: "Greece",
     locode: "GRRHO",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "KGS",
@@ -107,6 +126,8 @@ export const PORTS: PortConfig[] = [
     city: "Kos",
     country: "Greece",
     locode: "GRKGS",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "CFU",
@@ -115,6 +136,8 @@ export const PORTS: PortConfig[] = [
     city: "Corfu",
     country: "Greece",
     locode: "GRCFU",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "ZTH",
@@ -123,6 +146,8 @@ export const PORTS: PortConfig[] = [
     city: "Zakynthos",
     country: "Greece",
     locode: "GRZTH",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "ARG",
@@ -131,6 +156,8 @@ export const PORTS: PortConfig[] = [
     city: "Kefalonia",
     country: "Greece",
     locode: "GRARG",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
   {
     key: "LEF",
@@ -139,6 +166,8 @@ export const PORTS: PortConfig[] = [
     city: "Lefkada",
     country: "Greece",
     locode: "GRLEF",
+    description:
+      "The largest passenger port in Europe and the primary maritime gateway for the Aegean, serving over 20 million passengers annually.",
   },
 ];
 
