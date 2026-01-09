@@ -2,8 +2,10 @@ import { portByKey } from "@/lib/ports.config";
 import { notFound } from "next/navigation";
 import HeroDashboard from "@/components/sections/HeroDashboard";
 import LiveOperations from "@/components/sections/LiveOperations";
-import GettingHere from "@/components/sections/GettingHere";
-import FacilitiesLocal from "@/components/sections/FacilitiesLocal"; // <--- Import
+import TicketOperators from "@/components/sections/TicketOperators";
+import FacilitiesLocal from "@/components/sections/FacilitiesLocal";
+import PortStats from "@/components/sections/PortStats";
+import TerminalAccessGuide from "@/components/sections/TerminalAccessGuide"; // <--- Import New Component
 
 type Props = {
   params: Promise<{ port: string }>;
@@ -19,22 +21,23 @@ export default async function PortHome({ params }: Props) {
   }
 
   return (
-    <main className="bg-[#020617] min-h-screen selection:bg-[#0EA5E9] selection:text-white">
-      {/* 1. HERO DASHBOARD (Command Center) */}
+    <main className="bg-white min-h-screen selection:bg-[#0EA5E9] selection:text-white">
       <div className="pt-44">
         <HeroDashboard />
       </div>
 
-      {/* 2. LIVE OPERATIONS (Cams & Ops Data) */}
       <LiveOperations />
 
-      {/* 3. GETTING HERE (Ground Transport) */}
-      <GettingHere />
+      {/* Replaced 'GettingHere' with the new instructional guide */}
 
-      {/* 4. FACILITIES & LOCAL AREA (Services) */}
+      <TicketOperators />
+
       <FacilitiesLocal />
+      <TerminalAccessGuide />
 
-      {/* 5. FOOTER PLACEHOLDER */}
+      <PortStats />
+
+      {/* Footer is global */}
     </main>
   );
 }
