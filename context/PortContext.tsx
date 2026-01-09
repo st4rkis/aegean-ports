@@ -3,7 +3,12 @@
 import { createContext, useContext } from "react";
 import type { PortConfig } from "@/lib/ports.config";
 
-const PortContext = createContext<PortConfig | null>(null);
+// 1. Change the shape to include the 'port' key
+interface PortContextType {
+  port: PortConfig;
+}
+
+const PortContext = createContext<PortContextType | null>(null);
 
 export function PortProvider({
   value,
@@ -12,7 +17,12 @@ export function PortProvider({
   value: PortConfig;
   children: React.ReactNode;
 }) {
-  return <PortContext.Provider value={value}>{children}</PortContext.Provider>;
+  // 2. Wrap the value in an object: { port: value }
+  return (
+    <PortContext.Provider value={{ port: value }}>
+      {children}
+    </PortContext.Provider>
+  );
 }
 
 export function usePort() {
