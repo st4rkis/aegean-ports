@@ -9,15 +9,9 @@ export default function LiveOperations() {
       <div className="max-w-[1600px] mx-auto">
         {/* Section Header */}
         <div className="flex items-end justify-between mb-12">
-          <div>
-            <div className="flex items-center gap-4 mb-4">
-              <div className="h-px w-12 bg-[#0EA5E9]" />
-              <span className="text-[#0EA5E9] font-mono text-xs font-bold uppercase tracking-[0.3em]">
-                Live Surveillance
-              </span>
-            </div>
+          <div className="flex items-center gap-4 mb-4">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase">
-              Terminal <span className="text-[#0EA5E9]">Sector View</span>
+              Terminal
             </h2>
           </div>
 

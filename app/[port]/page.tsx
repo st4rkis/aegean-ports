@@ -5,7 +5,7 @@ import LiveOperations from "@/components/sections/LiveOperations";
 import TicketOperators from "@/components/sections/TicketOperators";
 import FacilitiesLocal from "@/components/sections/FacilitiesLocal";
 import PortStats from "@/components/sections/PortStats";
-import TerminalAccessGuide from "@/components/sections/TerminalAccessGuide"; // <--- Import New Component
+import TerminalAccessGuide from "@/components/sections/TerminalAccessGuide";
 
 type Props = {
   params: Promise<{ port: string }>;
@@ -22,22 +22,23 @@ export default async function PortHome({ params }: Props) {
 
   return (
     <main className="bg-white min-h-screen selection:bg-[#0EA5E9] selection:text-white">
-      <div className="pt-44">
+      {/* FIX: Removed 'pt-44'. The Sticky Header now pushes this down automatically. */}
+      <div>
         <HeroDashboard />
       </div>
 
       <LiveOperations />
 
-      {/* Replaced 'GettingHere' with the new instructional guide */}
+      {/* Suggested Order: Directions usually come before Facilities, but this order works too */}
+      <TerminalAccessGuide />
 
       <TicketOperators />
 
       <FacilitiesLocal />
-      <TerminalAccessGuide />
 
       <PortStats />
 
-      {/* Footer is global */}
+      {/* Footer is global in layout */}
     </main>
   );
 }

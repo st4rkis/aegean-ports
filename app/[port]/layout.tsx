@@ -17,11 +17,12 @@ export default async function PortLayout({
 
   return (
     <PortShell portCode={port}>
+      <Header />
+
       {children}
       {/* Footer sits here, inside the Shell (Context) but after children */}
       {/* <FloatingWhatsApp />
       <AirportFooter /> */}
-      <Header />
       <FooterFAQ />
     </PortShell>
   );

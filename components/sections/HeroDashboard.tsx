@@ -20,12 +20,6 @@ export default function HeroDashboard() {
 
       <div className="max-w-7xl mx-auto w-full relative z-10 px-6">
         {/* --- SYSTEM STATUS --- */}
-        <div className="flex items-center gap-4 mb-8">
-          <div className="h-px w-12 bg-[#0EA5E9]" />
-          <span className="text-[#0EA5E9] font-mono text-xs font-bold uppercase tracking-[0.3em]">
-            System Online
-          </span>
-        </div>
 
         {/* --- MAIN TITLE --- */}
         <h1 className="text-6xl md:text-[8rem] font-black tracking-tighter mb-12 leading-[0.8] text-slate-900 uppercase">
@@ -38,10 +32,6 @@ export default function HeroDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
           {/* --- LEFT COL: DESCRIPTION & SEARCH --- */}
           <div className="lg:col-span-7">
-            <p className="text-xl md:text-2xl text-slate-500 leading-relaxed font-light border-l-2 border-slate-200 pl-6 mb-12">
-              {port.description}
-            </p>
-
             {/* INTEGRATED SEARCH MODULE (Clean & Sharp) */}
             <div className="bg-white border border-slate-200 p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] group hover:border-[#0EA5E9] transition-all duration-300">
               <label className="text-[#0EA5E9] text-[10px] font-mono font-bold uppercase tracking-[0.3em] mb-4 block">

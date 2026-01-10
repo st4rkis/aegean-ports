@@ -8,14 +8,10 @@ import {
   Menu,
   X,
   Anchor,
-  Ship,
-  Navigation,
-  Info,
   ChevronRight,
   Calendar,
   MapPin,
   Globe,
-  Phone,
   Wind,
   AlertTriangle,
   Ticket,
@@ -23,6 +19,7 @@ import {
   HelpCircle,
   Bus,
   Search,
+  Ship,
 } from "lucide-react";
 
 export default function Header() {
@@ -33,7 +30,8 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      // 48px is the height of the top utility bar
+      setIsScrolled(window.scrollY > 48);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -50,10 +48,16 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col font-sans">
-        {/* --- LEVEL 1: UTILITY BAR (Light Theme) --- */}
+      {/* CRITICAL FIX: 
+        1. sticky: Stays in flow, pushes content down (no overlap).
+        2. -top-12: This 48px negative margin matches the height of the utility bar.
+           When you scroll down, the header moves up 48px and then "sticks", 
+           effectively hiding the utility bar but keeping the main nav visible.
+        3. z-50: Ensures it stays on top of everything.
+      */}
+      <header className="sticky -top-12 left-0 right-0 z-50 flex flex-col font-sans transition-all duration-300">
+        {/* --- LEVEL 1: UTILITY BAR (h-12 = 48px) --- */}
         <div className="bg-slate-50 border-b border-slate-200 h-12 flex items-center justify-between px-6 lg:px-12 relative z-50">
-          {/* Left: Operational Status */}
           <div className="flex items-center gap-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
             <div className="flex items-center gap-2 hover:text-[#0EA5E9] cursor-pointer transition-colors">
               <Wind className="w-3.5 h-3.5 text-slate-400" />
@@ -65,7 +69,6 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Right: Secondary Links */}
           <div className="hidden md:flex items-center gap-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
             <Link
               href="/contact"
@@ -84,27 +87,26 @@ export default function Header() {
           </div>
         </div>
 
-        {/* --- LEVEL 2: MAIN AUTHORITY BAR (Always White) --- */}
+        {/* --- LEVEL 2: MAIN BAR (Sticks to Top) --- */}
         <div
           className={`
-            w-full h-24 lg:h-28 transition-all duration-300 border-b
-            bg-white
+            w-full h-24 lg:h-28 border-b bg-white transition-all duration-300
             ${
               isScrolled
-                ? "border-slate-200 shadow-xl shadow-slate-900/5" // Adds shadow on scroll
-                : "border-slate-100" // Flat when at top
+                ? "border-slate-200 shadow-xl shadow-slate-900/5"
+                : "border-slate-100"
             }
           `}
         >
           <div className="h-full px-6 lg:px-12 flex items-center justify-between max-w-[1800px] mx-auto">
-            {/* 1. BRAND IDENTITY */}
+            {/* 1. BRAND */}
             <Link href="/" className="flex items-center gap-4 group shrink-0">
               <div className="w-14 h-14 bg-[#0EA5E9] flex items-center justify-center text-white shadow-[0_4px_20px_rgba(14,165,233,0.3)] group-hover:scale-105 transition-transform duration-300">
                 <Anchor className="w-8 h-8" />
               </div>
               <div className="flex flex-col justify-center h-full">
                 <span className="text-slate-900 font-black text-2xl lg:text-3xl leading-none uppercase tracking-tighter group-hover:text-[#0EA5E9] transition-colors">
-                  {port?.shortName || "PORT"} PORT
+                  PORT OF {port?.shortName || "PORT"}
                 </span>
                 <span className="text-slate-400 text-xs font-bold uppercase tracking-[0.4em] mt-1">
                   digital portal
@@ -112,7 +114,7 @@ export default function Header() {
               </div>
             </Link>
 
-            {/* 2. MAIN NAVIGATION */}
+            {/* 2. NAVIGATION */}
             <nav className="hidden xl:flex items-center gap-8 h-full">
               <Link
                 href="/"
@@ -120,8 +122,8 @@ export default function Header() {
                     h-full flex items-center text-sm font-bold uppercase tracking-widest border-b-4 border-transparent transition-all
                     ${
                       pathname === "/"
-                        ? "text-slate-900 border-[#0EA5E9]" // Active: Blue
-                        : "text-slate-500 hover:text-slate-900 hover:border-black" // Hover: Black Text + Black Border
+                        ? "text-slate-900 border-[#0EA5E9]"
+                        : "text-slate-500 hover:text-slate-900 hover:border-black"
                     }
                   `}
               >
@@ -137,8 +139,8 @@ export default function Header() {
                         h-full flex items-center text-sm font-bold uppercase tracking-widest border-b-4 transition-all
                         ${
                           isActive
-                            ? "text-slate-900 border-[#0EA5E9]" // Active: Blue
-                            : "text-slate-500 border-transparent hover:text-slate-900 hover:border-black" // Hover: Black Text + Black Border
+                            ? "text-slate-900 border-[#0EA5E9]"
+                            : "text-slate-500 border-transparent hover:text-slate-900 hover:border-black"
                         }
                       `}
                   >
@@ -177,10 +179,10 @@ export default function Header() {
         </div>
       </header>
 
-      {/* --- MOBILE DRAWER (White Theme) --- */}
+      {/* --- MOBILE DRAWER --- */}
       <div
         className={`
-          fixed inset-0 z-40 bg-white transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
+          fixed inset-0 z-[60] bg-white transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
           ${
             isMobileMenuOpen
               ? "opacity-100 translate-y-0"
@@ -188,6 +190,14 @@ export default function Header() {
           }
         `}
       >
+        <div className="absolute top-6 right-6 z-50">
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="p-2 bg-slate-100 rounded-full"
+          >
+            <X className="w-8 h-8 text-slate-900" />
+          </button>
+        </div>
         <div className="h-full flex flex-col px-6 pt-40 pb-10 overflow-y-auto">
           <div className="flex flex-col space-y-2 mb-auto border-t border-slate-100">
             {[
