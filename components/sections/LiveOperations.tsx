@@ -6,7 +6,9 @@ import Link from "next/link";
 export default function LiveOperations() {
   return (
     <section className="w-full bg-white border-b border-slate-200 py-20 px-6">
-      <div className="max-w-400 mx-auto">
+      <div className="max-w-[1600px] mx-auto">
+        {" "}
+        {/* Fixed max-w-400 typo to standard max-w-[1600px] based on context */}
         {/* Section Header */}
         <div className="flex items-end justify-between mb-12">
           <div className="flex items-center gap-4 mb-4">
@@ -20,13 +22,12 @@ export default function LiveOperations() {
             Live Feed • UTC +2
           </div>
         </div>
-
         {/* --- MAIN CAMERA FEED (Full Width) --- */}
         <div className="flex flex-col gap-6">
           {/* Camera Frame - No Shadow, Sharp Corners, Flat Border */}
           <div className="relative aspect-video w-full bg-slate-100 border border-slate-200 group overflow-hidden rounded-none">
-            {/* Placeholder for Video Feed */}
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559138867-2708307d1746?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-500" />
+            {/* UPDATED: Placeholder for Video Feed using local image */}
+            <div className="absolute inset-0 bg-[url('/images/port-cam-placeholder.jpg')] bg-cover bg-center" />
 
             {/* Overlay UI: Top Left Label */}
             <div className="absolute top-0 left-0 flex items-center gap-3 bg-white border-r border-b border-slate-200 px-4 py-2 z-10">
@@ -44,7 +45,7 @@ export default function LiveOperations() {
             </div>
 
             {/* Scanning Line Effect (Optional "Tech" feel) */}
-            <div className="absolute inset-0 bg-linear-to-b from-transparent via-white/5 to-transparent h-[10%] w-full animate-[scan_4s_linear_infinite] pointer-events-none opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-[10%] w-full animate-[scan_4s_linear_infinite] pointer-events-none opacity-50" />
           </div>
 
           {/* View More Action */}
