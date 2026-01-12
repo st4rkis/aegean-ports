@@ -6,12 +6,12 @@ import Link from "next/link";
 export default function LiveOperations() {
   return (
     <section className="w-full bg-white border-b border-slate-200 py-20 px-6">
-      <div className="max-w-[1600px] mx-auto">
+      <div className="max-w-400 mx-auto">
         {/* Section Header */}
         <div className="flex items-end justify-between mb-12">
           <div className="flex items-center gap-4 mb-4">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase">
-              Terminal
+              Live <span className="text-[#0EA5E9]">View</span>
             </h2>
           </div>
 
@@ -44,7 +44,7 @@ export default function LiveOperations() {
             </div>
 
             {/* Scanning Line Effect (Optional "Tech" feel) */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-[10%] w-full animate-[scan_4s_linear_infinite] pointer-events-none opacity-50" />
+            <div className="absolute inset-0 bg-linear-to-b from-transparent via-white/5 to-transparent h-[10%] w-full animate-[scan_4s_linear_infinite] pointer-events-none opacity-50" />
           </div>
 
           {/* View More Action */}

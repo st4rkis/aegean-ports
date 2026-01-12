@@ -6,6 +6,8 @@ import TicketOperators from "@/components/sections/TicketOperators";
 import FacilitiesLocal from "@/components/sections/FacilitiesLocal";
 import PortStats from "@/components/sections/PortStats";
 import TerminalAccessGuide from "@/components/sections/TerminalAccessGuide";
+import UsefulServices from "@/components/sections/UsefulServices";
+import GettingTo from "@/components/sections/GettingHere";
 
 type Props = {
   params: Promise<{ port: string }>;
@@ -26,11 +28,13 @@ export default async function PortHome({ params }: Props) {
       <div>
         <HeroDashboard />
       </div>
+      <UsefulServices />
 
       <LiveOperations />
+      <GettingTo />
 
       {/* Suggested Order: Directions usually come before Facilities, but this order works too */}
-      <TerminalAccessGuide />
+      {/* <TerminalAccessGuide /> */}
 
       <TicketOperators />
 

@@ -4,6 +4,7 @@ import PortShell from "@/components/PortShell";
 // import AirportFooter from "@/components/AirportFooter";
 // import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import Header from "@/components/Header";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import FooterFAQ from "@/components/sections/FooterFAQ";
 
 export default async function PortLayout({
@@ -23,6 +24,7 @@ export default async function PortLayout({
       {/* Footer sits here, inside the Shell (Context) but after children */}
       {/* <FloatingWhatsApp />
       <AirportFooter /> */}
+      <FloatingWhatsApp />
       <FooterFAQ />
     </PortShell>
   );

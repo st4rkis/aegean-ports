@@ -1,130 +1,163 @@
 "use client";
 
-import { Users, Anchor, Container, Map, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Anchor, Map, Globe } from "lucide-react";
 
 export default function PortStats() {
   return (
-    <section className="w-full bg-white border-b border-slate-200 py-24 px-6 relative overflow-hidden">
-      {/* Background Decor: Technical Grid Lines */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+    <section className="w-full bg-[#020617] py-24 px-6 relative overflow-hidden border-t border-slate-800">
+      {/* Background Ambience (Deep Magma) */}
+      <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-[#0EA5E9]/10 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#0EA5E9]/50 to-transparent" />
 
       <div className="max-w-[1600px] mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+        {/* --- Header --- */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <div className="flex items-center gap-4 mb-4">
-              <div className="h-px w-12 bg-[#0EA5E9]" />
-              <span className="text-[#0EA5E9] font-mono text-xs font-bold uppercase tracking-[0.3em]">
-                System Metrics
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase">
-              Operational <span className="text-[#0EA5E9]">Scale</span>
+            <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none mb-2">
+              Port <span className="text-[#0EA5E9]">Statistics</span>
             </h2>
+            <p className="text-slate-400 font-mono text-sm uppercase tracking-widest">
+              Traffic Intelligence & Connectivity Data
+            </p>
           </div>
-          <div className="text-right hidden md:block">
-            <div className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-1">
-              Data Period: FY 2024-2025
+
+          {/* Slider Controls Replica (Visual Only) */}
+          <div className="flex gap-2">
+            <div className="w-10 h-10 border border-slate-700 flex items-center justify-center text-slate-500 hover:text-white hover:border-[#0EA5E9] transition-colors cursor-pointer">
+              <span>&lt;</span>
             </div>
-            <div className="text-xs font-mono text-slate-900 uppercase tracking-widest font-bold">
-              Status: Verified
+            <div className="h-10 px-4 border border-slate-700 flex items-center justify-center text-slate-400 font-mono text-xs tracking-widest">
+              FY 2024-25
+            </div>
+            <div className="w-10 h-10 border border-slate-700 flex items-center justify-center text-slate-500 hover:text-white hover:border-[#0EA5E9] transition-colors cursor-pointer">
+              <span>&gt;</span>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* STAT 1: Passengers */}
-          <div className="bg-white border border-slate-200 p-8 group hover:border-[#0EA5E9] hover:shadow-[0_10px_40px_-15px_rgba(14,165,233,0.2)] transition-all duration-300">
-            <div className="flex justify-between items-start mb-6">
-              <div className="p-3 bg-slate-50 text-[#0EA5E9]">
-                <Users className="w-6 h-6" />
-              </div>
-              <span className="flex items-center gap-1 text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded-none uppercase">
-                <ArrowUpRight className="w-3 h-3" /> +12% YoY
+        {/* --- The Grid (Cloned Layout) --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* CARD 1: FERRY ARRIVALS (Matches 'Annual Traffic' Layout) */}
+          <div className="lg:col-span-4 bg-[#0B1121] border border-slate-800 p-10 flex flex-col justify-between relative group hover:border-[#0EA5E9] transition-all duration-300">
+            {/* Icon/Label */}
+            <div className="flex justify-between items-start mb-12">
+              <span className="text-[#0EA5E9] font-mono text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-2">
+                <Anchor className="w-3 h-3" /> Vessel Movements
               </span>
             </div>
-            <div className="text-5xl font-black text-slate-900 mb-2 tracking-tighter">
-              17.4<span className="text-[#0EA5E9]">M</span>
-            </div>
-            <p className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-2">
-              Annual Passengers
-            </p>
-            <p className="text-xs text-slate-500 leading-relaxed border-t border-slate-100 pt-4 mt-4">
-              Highest passenger volume in the Eastern Mediterranean basin.
-            </p>
-          </div>
 
-          {/* STAT 2: Ferry Movements */}
-          <div className="bg-white border border-slate-200 p-8 group hover:border-[#0EA5E9] hover:shadow-[0_10px_40px_-15px_rgba(14,165,233,0.2)] transition-all duration-300">
-            <div className="flex justify-between items-start mb-6">
-              <div className="p-3 bg-slate-50 text-[#0EA5E9]">
-                <Anchor className="w-6 h-6" />
+            {/* Big Metric */}
+            <div>
+              <div className="text-7xl font-black text-white tracking-tighter mb-2">
+                24.5<span className="text-[#0EA5E9]">k</span>
               </div>
-              <span className="flex items-center gap-1 text-[10px] font-bold text-slate-500 bg-slate-50 px-2 py-1 rounded-none uppercase">
-                Daily Avg
-              </span>
+              <p className="text-slate-400 font-medium text-sm uppercase tracking-wide">
+                Annual Ferry Arrivals
+              </p>
             </div>
-            <div className="text-5xl font-black text-slate-900 mb-2 tracking-tighter">
-              450<span className="text-[#0EA5E9]">+</span>
+
+            {/* Growth Pill (Bottom Left) */}
+            <div className="mt-12">
+              <div className="inline-flex items-center gap-3 bg-slate-900 border border-slate-700 px-4 py-3">
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-slate-400 uppercase tracking-wider font-bold">
+                    Growth vs Prev. Year
+                  </span>
+                  <span className="text-[#0EA5E9] font-bold text-lg flex items-center gap-1 leading-none mt-1">
+                    <ArrowUpRight className="w-4 h-4" /> +6.5%
+                  </span>
+                </div>
+              </div>
             </div>
-            <p className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-2">
-              Vessel Movements
-            </p>
-            {/* Visual Bar Graph */}
-            <div className="flex items-end gap-1 h-8 mt-4 border-t border-slate-100 pt-4">
-              {[40, 70, 45, 90, 60, 80, 50].map((h, i) => (
-                <div
-                  key={i}
-                  style={{ height: `${h}%` }}
-                  className="flex-1 bg-slate-200 group-hover:bg-[#0EA5E9] transition-colors duration-500"
-                />
-              ))}
+
+            {/* Hover Decor */}
+            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+              <Anchor className="w-40 h-40 text-white" />
             </div>
           </div>
 
-          {/* STAT 3: Destinations */}
-          <div className="bg-white border border-slate-200 p-8 group hover:border-[#0EA5E9] hover:shadow-[0_10px_40px_-15px_rgba(14,165,233,0.2)] transition-all duration-300">
-            <div className="flex justify-between items-start mb-6">
-              <div className="p-3 bg-slate-50 text-[#0EA5E9]">
-                <Map className="w-6 h-6" />
-              </div>
-              <span className="flex items-center gap-1 text-[10px] font-bold text-slate-500 bg-slate-50 px-2 py-1 rounded-none uppercase">
-                Network
+          {/* CARD 2: CONNECTIVITY (Matches 'Connectivity' Layout) */}
+          <div className="lg:col-span-4 bg-[#0B1121] border border-slate-800 p-10 flex flex-col justify-center relative group hover:border-[#0EA5E9] transition-all duration-300">
+            <div className="mb-8">
+              <span className="text-[#0EA5E9] font-mono text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-2">
+                <Globe className="w-3 h-3" /> Connectivity Split
               </span>
             </div>
-            <div className="text-5xl font-black text-slate-900 mb-2 tracking-tighter">
-              72<span className="text-[#0EA5E9]"></span>
+
+            {/* Progress Bar Container */}
+            <div className="w-full">
+              <div className="flex h-16 w-full mb-6">
+                {/* Domestic Part (Yellow in screenshot -> Blue here) */}
+                <div className="h-full bg-[#0EA5E9] w-[95%] flex items-center justify-center text-white font-black text-xl">
+                  95%
+                </div>
+                {/* International Part (White) */}
+                <div className="h-full bg-white w-[5%] flex items-center justify-center text-slate-900 font-black text-xs">
+                  5%
+                </div>
+              </div>
+
+              {/* Legend */}
+              <div className="flex justify-between items-center border-t border-slate-800 pt-6">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="w-2 h-2 bg-[#0EA5E9] rounded-none" />
+                    <span className="text-white font-bold text-sm uppercase">
+                      Domestic
+                    </span>
+                  </div>
+                  <span className="text-slate-500 text-xs pl-4 block">
+                    16.8M Travelers
+                  </span>
+                </div>
+                <div className="text-right">
+                  <div className="flex items-center gap-2 justify-end mb-1">
+                    <div className="w-2 h-2 bg-white rounded-none" />
+                    <span className="text-white font-bold text-sm uppercase">
+                      Int'l
+                    </span>
+                  </div>
+                  <span className="text-slate-500 text-xs block">
+                    0.6M Travelers
+                  </span>
+                </div>
+              </div>
             </div>
-            <p className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-2">
-              Island Connections
-            </p>
-            <p className="text-xs text-slate-500 leading-relaxed border-t border-slate-100 pt-4 mt-4">
-              Direct links to Cyclades, Dodecanese, Crete, and Saronic Gulf.
-            </p>
           </div>
 
-          {/* STAT 4: Cargo/TEU */}
-          <div className="bg-white border border-slate-200 p-8 group hover:border-[#0EA5E9] hover:shadow-[0_10px_40px_-15px_rgba(14,165,233,0.2)] transition-all duration-300">
-            <div className="flex justify-between items-start mb-6">
-              <div className="p-3 bg-slate-50 text-[#0EA5E9]">
-                <Container className="w-6 h-6" />
-              </div>
-              <span className="flex items-center gap-1 text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded-none uppercase">
-                <ArrowUpRight className="w-3 h-3" /> +4.5% YoY
+          {/* CARD 3: DESTINATIONS (Matches 'Summer Surge' Layout but adapted for Count) */}
+          <div className="lg:col-span-4 bg-[#0B1121] border border-slate-800 p-10 flex flex-col relative group hover:border-[#0EA5E9] transition-all duration-300">
+            <div className="mb-auto">
+              <span className="text-[#0EA5E9] font-mono text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-2">
+                <Map className="w-3 h-3" /> Network Reach
               </span>
+              <h3 className="text-3xl font-black text-white uppercase tracking-tighter mt-4 mb-2">
+                Island <br /> Connections
+              </h3>
+              <p className="text-slate-400 text-xs leading-relaxed max-w-[200px]">
+                Direct routes to Cyclades, Dodecanese, Crete & Saronic Gulf.
+              </p>
             </div>
-            <div className="text-5xl font-black text-slate-900 mb-2 tracking-tighter">
-              5.1<span className="text-[#0EA5E9]">M</span>
+
+            {/* Big Chart-like Visual or Number */}
+            <div className="mt-8 flex items-end gap-2 h-32 border-b border-slate-800 pb-0">
+              {/* Visualizing "72 Destinations" as a bar chart aesthetic */}
+              <div className="flex-1 bg-slate-800 h-[40%] group-hover:bg-[#0EA5E9]/40 transition-colors duration-500" />
+              <div className="flex-1 bg-slate-800 h-[60%] group-hover:bg-[#0EA5E9]/60 transition-colors duration-500" />
+              <div className="flex-1 bg-slate-800 h-[30%] group-hover:bg-[#0EA5E9]/30 transition-colors duration-500" />
+              <div className="flex-1 bg-[#0EA5E9] h-[100%] relative group-hover:shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all">
+                <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-white font-bold text-lg">
+                  72
+                </span>
+              </div>
+              <div className="flex-1 bg-slate-800 h-[50%] group-hover:bg-[#0EA5E9]/50 transition-colors duration-500" />
+              <div className="flex-1 bg-slate-800 h-[75%] group-hover:bg-[#0EA5E9]/75 transition-colors duration-500" />
             </div>
-            <p className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-2">
-              Cargo TEUs
-            </p>
-            {/* Simple Progress Line */}
-            <div className="w-full h-1 bg-slate-100 mt-6 overflow-hidden">
-              <div className="h-full w-[85%] bg-[#0EA5E9] group-hover:animate-pulse" />
-            </div>
-            <div className="flex justify-between mt-2 text-[10px] font-mono uppercase text-slate-400">
-              <span>Capacity</span>
-              <span>85% Load</span>
+
+            <div className="flex justify-between text-[10px] font-mono text-slate-500 mt-2 uppercase">
+              <span>Cyclades</span>
+              <span>Crete</span>
+              <span>Dodecanese</span>
             </div>
           </div>
         </div>

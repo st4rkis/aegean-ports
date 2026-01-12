@@ -13,7 +13,6 @@ import {
   MapPin,
   Globe,
   Wind,
-  AlertTriangle,
   Ticket,
   Coffee,
   HelpCircle,
@@ -30,7 +29,6 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // 48px is the height of the top utility bar
       setIsScrolled(window.scrollY > 48);
     };
     window.addEventListener("scroll", handleScroll);
@@ -48,27 +46,31 @@ export default function Header() {
 
   return (
     <>
-      {/* CRITICAL FIX: 
-        1. sticky: Stays in flow, pushes content down (no overlap).
-        2. -top-12: This 48px negative margin matches the height of the utility bar.
-           When you scroll down, the header moves up 48px and then "sticks", 
-           effectively hiding the utility bar but keeping the main nav visible.
-        3. z-50: Ensures it stays on top of everything.
-      */}
       <header className="sticky -top-12 left-0 right-0 z-50 flex flex-col font-sans transition-all duration-300">
-        {/* --- LEVEL 1: UTILITY BAR (h-12 = 48px) --- */}
+        {/* --- LEVEL 1: UTILITY BAR --- */}
         <div className="bg-slate-50 border-b border-slate-200 h-12 flex items-center justify-between px-6 lg:px-12 relative z-50">
-          <div className="flex items-center gap-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
+          <div className="flex items-center gap-8 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
+            {/* Wind Widget */}
             <div className="flex items-center gap-2 hover:text-[#0EA5E9] cursor-pointer transition-colors">
               <Wind className="w-3.5 h-3.5 text-slate-400" />
               <span>24km/h NNE</span>
             </div>
-            <div className="flex items-center gap-2 text-[#0EA5E9] animate-pulse">
-              <AlertTriangle className="w-3.5 h-3.5" />
-              <span>Service Normal</span>
+
+            {/* SEPARATOR */}
+            <div className="w-px h-3 bg-slate-300" />
+
+            {/* NEW: SHARP TECH STATUS (No Rounded Corners, No Shadow) */}
+            <div className="flex items-center gap-3 text-emerald-600">
+              {/* Square Pulsing Indicator */}
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-none bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-none bg-emerald-500"></span>
+              </span>
+              <span className="font-bold">Service Normal</span>
             </div>
           </div>
 
+          {/* Right Links */}
           <div className="hidden md:flex items-center gap-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
             <Link
               href="/contact"
@@ -87,7 +89,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* --- LEVEL 2: MAIN BAR (Sticks to Top) --- */}
+        {/* --- LEVEL 2: MAIN BAR (Sticky) --- */}
         <div
           className={`
             w-full h-24 lg:h-28 border-b bg-white transition-all duration-300
