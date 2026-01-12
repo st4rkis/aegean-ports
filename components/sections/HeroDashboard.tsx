@@ -11,8 +11,15 @@ export default function HeroDashboard() {
 
   return (
     <div className="relative w-full bg-white text-slate-900 border-b border-slate-200 overflow-hidden min-h-[calc(100dvh-7rem)] flex flex-col">
-      {/* --- BACKGROUND ACCENTS --- */}
-      <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-slate-50 to-transparent pointer-events-none" />
+      {/* --- BACKGROUND IMAGE LAYER (New) --- */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[url('/images/port-bg-placeholder.jpg')] bg-cover bg-center" />
+        {/* Overlay: Essential to keep black text readable against a photo */}
+        <div className="absolute inset-0 bg-white/10" />
+      </div>
+
+      {/* --- BACKGROUND ACCENTS (Existing) --- */}
+      <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-slate-50 to-transparent pointer-events-none z-0" />
 
       {/* --- ABSOLUTE TOP ELEMENTS (Removed from flow to allow perfect centering) --- */}
       <div className="absolute top-8 right-6 lg:right-12 z-20 hidden lg:block text-right">
@@ -41,7 +48,7 @@ export default function HeroDashboard() {
             {/* ARRIVALS */}
             <Link
               href="/arrivals"
-              className="group relative h-40 bg-white border border-slate-200 hover:border-[#0EA5E9] transition-all duration-300 flex flex-col justify-between p-6 shadow-sm hover:shadow-md"
+              className="group relative h-40 bg-white/80 backdrop-blur-sm border border-slate-200 hover:border-[#0EA5E9] transition-all duration-300 flex flex-col justify-between p-6 shadow-sm hover:shadow-md"
             >
               <div className="flex justify-between items-start">
                 <span className="text-slate-400 font-mono text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-[#0EA5E9] transition-colors">
@@ -57,7 +64,7 @@ export default function HeroDashboard() {
             {/* DEPARTURES */}
             <Link
               href="/departures"
-              className="group relative h-40 bg-white border border-slate-200 hover:border-[#0EA5E9] transition-all duration-300 flex flex-col justify-between p-6 shadow-sm hover:shadow-md"
+              className="group relative h-40 bg-white/80 backdrop-blur-sm border border-slate-200 hover:border-[#0EA5E9] transition-all duration-300 flex flex-col justify-between p-6 shadow-sm hover:shadow-md"
             >
               <div className="flex justify-between items-start">
                 <span className="text-slate-400 font-mono text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-[#0EA5E9] transition-colors">
@@ -72,7 +79,7 @@ export default function HeroDashboard() {
           </div>
 
           {/* 3. SEARCH BAR */}
-          <div className="w-full bg-white border border-slate-200 flex flex-col md:flex-row group hover:border-[#0EA5E9] transition-all duration-300 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)]">
+          <div className="w-full bg-white/90 backdrop-blur-sm border border-slate-200 flex flex-col md:flex-row group hover:border-[#0EA5E9] transition-all duration-300 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)]">
             <div className="relative flex-grow">
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-hover:text-[#0EA5E9] transition-colors" />
               <input

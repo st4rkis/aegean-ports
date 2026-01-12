@@ -17,17 +17,12 @@ import {
 export default function FacilitiesLocal() {
   return (
     <section className="w-full bg-white border-b border-slate-200 py-24 px-6 overflow-hidden">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <div className="max-w-400 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16">
         {/* --- LEFT COL: INTERNAL FACILITIES --- */}
         <div className="lg:col-span-2 min-w-0">
           {" "}
           {/* min-w-0 prevents flex blowout */}
-          <div className="flex items-center gap-4 mb-10">
-            <div className="h-px w-12 bg-[#0EA5E9]" />
-            <span className="text-[#0EA5E9] font-mono text-xs font-bold uppercase tracking-[0.3em]">
-              Terminal Services
-            </span>
-          </div>
+          <div className="flex items-center gap-4 mb-10"></div>
           <h2 className="text-4xl font-black text-slate-900 tracking-tighter uppercase mb-12">
             Facility <span className="text-[#0EA5E9]">Status</span>
           </h2>
@@ -83,7 +78,7 @@ export default function FacilitiesLocal() {
               <div
                 key={idx}
                 className="
-                  flex-shrink-0 w-[85vw] md:w-[400px] lg:w-auto snap-center 
+                  shrink-0 w-[85vw] md:w-100 lg:w-auto snap-center 
                   flex items-start gap-6 p-6 border border-slate-200 bg-white 
                   hover:border-[#0EA5E9] transition-all shadow-sm hover:shadow-md group
                 "
@@ -113,7 +108,7 @@ export default function FacilitiesLocal() {
         {/* --- RIGHT COL: PERIMETER SCAN (10-min Radius) --- */}
         <div className="lg:col-span-1 bg-slate-50 border border-slate-200 p-8 relative overflow-hidden h-fit">
           {/* Decorative Gradient Line */}
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent opacity-50" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-[#0EA5E9] to-transparent opacity-50" />
 
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-xl font-black text-slate-900 uppercase tracking-tighter">

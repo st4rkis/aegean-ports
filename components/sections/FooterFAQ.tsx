@@ -49,12 +49,7 @@ export default function FooterFAQ() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Header Column */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="h-px w-12 bg-[#0EA5E9]" />
-              <span className="text-[#0EA5E9] font-mono text-xs font-bold uppercase tracking-[0.3em]">
-                Help Desk
-              </span>
-            </div>
+            <div className="flex items-center gap-4 mb-4"></div>
             <h2 className="text-4xl font-black text-slate-900 uppercase tracking-tighter mb-6">
               <span className="text-[#0EA5E9]">FAQ</span>
             </h2>
@@ -79,7 +74,7 @@ export default function FooterFAQ() {
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-                  className="w-full flex items-center justify-between py-6 text-left group hover:bg-white transition-colors px-4 -mx-4 rounded-none"
+                  className="w-full flex items-center justify-between py-6 text-left group hover:text-black transition-colors px-4 -mx-4 rounded-none"
                 >
                   <span
                     className={`text-lg font-bold uppercase tracking-wider transition-colors ${
