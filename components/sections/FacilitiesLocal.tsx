@@ -23,8 +23,8 @@ export default function FacilitiesLocal() {
           {" "}
           {/* min-w-0 prevents flex blowout */}
           <div className="flex items-center gap-4 mb-10"></div>
-          <h2 className="text-4xl font-black text-slate-900 tracking-tighter uppercase mb-12">
-            Facility <span className="text-[#0EA5E9]">Status</span>
+          <h2 className="text-5xl font-black text-slate-900 tracking-tighter uppercase mb-12">
+            Port <span className="text-[#0EA5E9]">Facilities</span>
           </h2>
           {/* THE SWIPER HYBRID: 
             - Mobile: flex + overflow-x-auto (Horizontal Scroll)
