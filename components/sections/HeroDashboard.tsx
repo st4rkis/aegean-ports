@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, ArrowDownLeft, ArrowUpRight } from "lucide-react";
+import { Search, ArrowRight, Ship } from "lucide-react";
 import { usePort } from "@/context/PortContext";
 import Link from "next/link";
 
@@ -10,87 +10,97 @@ export default function HeroDashboard() {
   if (!port) return null;
 
   return (
-    <div className="relative w-full bg-white text-slate-900 border-b border-slate-200 overflow-hidden min-h-[calc(100dvh-7rem)] flex flex-col">
-      {/* --- BACKGROUND IMAGE LAYER (New) --- */}
+    <div className="relative w-full bg-slate-900 text-slate-900 border-b border-slate-200 overflow-hidden min-h-[calc(100dvh-7rem)] flex flex-col">
+      {/* --- BACKGROUND IMAGE LAYER --- */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[url('/images/port-bg-placeholder.jpg')] bg-cover bg-center" />
-        {/* Overlay: Essential to keep black text readable against a photo */}
-        <div className="absolute inset-0 bg-white/10" />
+        {/* Darker Overlay: Increased opacity to 70% to ensure white text is strictly readable */}
+        <div className="absolute inset-0 bg-slate-950/70" />
       </div>
 
-      {/* --- BACKGROUND ACCENTS (Existing) --- */}
-      <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-slate-50 to-transparent pointer-events-none z-0" />
-
-      {/* --- ABSOLUTE TOP ELEMENTS (Removed from flow to allow perfect centering) --- */}
+      {/* --- ABSOLUTE TOP ELEMENTS --- */}
       <div className="absolute top-8 right-6 lg:right-12 z-20 hidden lg:block text-right">
-        <div className="text-slate-400 font-mono text-[10px] uppercase tracking-[0.3em] mb-1">
+        <div className="text-white/60 font-mono text-[10px] uppercase tracking-[0.3em] mb-1">
           Grid Reference
         </div>
-        <div className="text-slate-900 font-mono text-xs tracking-widest font-bold">
+        <div className="text-white font-mono text-xs tracking-widest font-bold">
           37.9429° N, 23.6469° E
         </div>
       </div>
 
-      {/* --- MAIN CONTENT CENTERED WRAPPER --- */}
+      {/* --- MAIN CONTENT WRAPPER --- */}
       <div className="flex-1 flex flex-col justify-center items-center relative z-10 px-6 w-full max-w-[1800px] mx-auto">
-        {/* Container for the stack to control spacing consistently */}
-        <div className="w-full max-w-5xl flex flex-col gap-10 md:gap-14">
-          {/* 1. MASSIVE TITLE (Centered & Single Line) */}
-          <div className="text-center">
-            {/* UPDATED: Smaller size, whitespace-nowrap, removed <br/> */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-900 uppercase whitespace-nowrap">
+        {/* Vertical Stack: Title Group -> Control Box */}
+        <div className="w-full max-w-4xl flex flex-col items-center gap-12">
+          {/* 1. PORT TITLE & DESCRIPTION */}
+          <div className="text-center space-y-6">
+            {/* H1: White & Blue */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase whitespace-nowrap drop-shadow-2xl">
               {port.shortName} <span className="text-[#0EA5E9]">PORT</span>
             </h1>
+
+            {/* H2/Paragraph: Description text in White/Slate-200 */}
+            <p className="text-lg md:text-2xl text-slate-200 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+              The primary maritime gateway connecting the mainland to the Aegean
+              archipelago.
+              <span className="hidden md:inline">
+                {" "}
+                Operational capacity for high-speed ferry logistics and
+                commercial transit.
+              </span>
+            </p>
           </div>
 
-          {/* 2. COMPACT ACTION GRID (Arrivals/Departures) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* ARRIVALS */}
-            <Link
-              href="/arrivals"
-              className="group relative h-40 bg-white/80 backdrop-blur-sm border border-slate-200 hover:border-[#0EA5E9] transition-all duration-300 flex flex-col justify-between p-6 shadow-sm hover:shadow-md"
-            >
-              <div className="flex justify-between items-start">
-                <span className="text-slate-400 font-mono text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-[#0EA5E9] transition-colors">
-                  Inbound
-                </span>
-                <ArrowDownLeft className="w-5 h-5 text-slate-300 group-hover:text-[#0EA5E9] transition-colors" />
-              </div>
-              <h2 className="text-3xl font-black tracking-tighter text-slate-900 uppercase group-hover:text-[#0EA5E9] transition-colors">
-                Arrivals
+          {/* 2. THE CONSOLIDATED "CONTROL BOX" */}
+          <div className="w-full max-w-2xl bg-white border-l-4 border-[#0EA5E9] p-8 md:p-10 shadow-2xl rounded-none">
+            {/* Header */}
+            <div className="mb-8">
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mb-2">
+                Check Ferry Status
               </h2>
-            </Link>
+              <p className="text-slate-500 text-sm font-medium">
+                Real-time tracking for arrivals, departures, and vessel logic.
+              </p>
+            </div>
 
-            {/* DEPARTURES */}
-            <Link
-              href="/departures"
-              className="group relative h-40 bg-white/80 backdrop-blur-sm border border-slate-200 hover:border-[#0EA5E9] transition-all duration-300 flex flex-col justify-between p-6 shadow-sm hover:shadow-md"
-            >
-              <div className="flex justify-between items-start">
-                <span className="text-slate-400 font-mono text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-[#0EA5E9] transition-colors">
-                  Outbound
-                </span>
-                <ArrowUpRight className="w-5 h-5 text-slate-300 group-hover:text-[#0EA5E9] transition-colors" />
-              </div>
-              <h2 className="text-3xl font-black tracking-tighter text-slate-900 uppercase group-hover:text-[#0EA5E9] transition-colors">
-                Departures
-              </h2>
-            </Link>
-          </div>
-
-          {/* 3. SEARCH BAR */}
-          <div className="w-full bg-white/90 backdrop-blur-sm border border-slate-200 flex flex-col md:flex-row group hover:border-[#0EA5E9] transition-all duration-300 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)]">
-            <div className="relative flex-grow">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-hover:text-[#0EA5E9] transition-colors" />
+            {/* Input Field */}
+            <div className="relative mb-8 group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#0EA5E9] transition-colors" />
               <input
                 type="text"
-                placeholder="QUICK SEARCH: VESSEL, GATE OR COMPANY..."
-                className="w-full h-16 pl-16 pr-4 bg-transparent text-slate-900 font-mono text-sm uppercase placeholder:text-slate-400 focus:outline-none"
+                placeholder="SEARCH VESSEL, GATE OR COMPANY..."
+                className="w-full h-16 bg-slate-50 border border-slate-200 pl-12 pr-4 text-slate-900 font-bold uppercase tracking-wider text-sm placeholder:text-slate-400 focus:outline-none focus:border-[#0EA5E9] focus:bg-white transition-all rounded-none"
               />
             </div>
-            <button className="h-16 px-10 bg-slate-50 border-l border-slate-200 text-slate-900 font-black uppercase tracking-widest hover:bg-[#0EA5E9] hover:text-white transition-colors duration-300 whitespace-nowrap text-xs">
-              Track Vessel
-            </button>
+
+            {/* Action Links (Bottom Row) */}
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-12 border-t border-slate-100 pt-6">
+              <Link
+                href="/departures"
+                className="group flex items-center gap-3 text-slate-900 hover:text-[#0EA5E9] transition-colors"
+              >
+                <div className="p-2 bg-slate-50 group-hover:bg-[#0EA5E9] transition-colors">
+                  <Ship className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+                </div>
+                <span className="font-black uppercase tracking-widest text-sm">
+                  Departures
+                </span>
+                <ArrowRight className="w-4 h-4 ml-auto sm:ml-0 group-hover:translate-x-1 transition-transform" />
+              </Link>
+
+              <Link
+                href="/arrivals"
+                className="group flex items-center gap-3 text-slate-900 hover:text-[#0EA5E9] transition-colors"
+              >
+                <div className="p-2 bg-slate-50 group-hover:bg-[#0EA5E9] transition-colors">
+                  <Ship className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors rotate-180" />
+                </div>
+                <span className="font-black uppercase tracking-widest text-sm">
+                  Arrivals
+                </span>
+                <ArrowRight className="w-4 h-4 ml-auto sm:ml-0 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

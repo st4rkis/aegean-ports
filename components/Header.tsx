@@ -29,6 +29,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Add shadow when the utility bar (approx 48px) has scrolled out of view
       setIsScrolled(window.scrollY > 48);
     };
     window.addEventListener("scroll", handleScroll);
@@ -46,81 +47,40 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky -top-12 left-0 right-0 z-50 flex flex-col font-sans transition-all duration-300">
-        {/* --- LEVEL 1: UTILITY BAR --- */}
-        <div className="bg-slate-50 border-b border-slate-200 h-12 flex items-center justify-between px-6 lg:px-12 relative z-50">
-          <div className="flex items-center gap-8 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
-            {/* Wind Widget */}
-            <div className="flex items-center gap-2 hover:text-[#0EA5E9] cursor-pointer transition-colors">
-              <Wind className="w-3.5 h-3.5 text-slate-400" />
-              <span>24km/h NNE</span>
-            </div>
-
-            {/* SEPARATOR */}
-            <div className="w-px h-3 bg-slate-300" />
-
-            {/* NEW: SHARP TECH STATUS (No Rounded Corners, No Shadow) */}
-            <div className="flex items-center gap-3 text-emerald-600">
-              {/* Square Pulsing Indicator */}
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-none bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-none bg-emerald-500"></span>
-              </span>
-              <span className="font-bold">Service Normal</span>
-            </div>
-          </div>
-
-          {/* Right Links */}
-          <div className="hidden md:flex items-center gap-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
-            <Link
-              href="/contact"
-              className="hover:text-black transition-colors"
-            >
-              Contact
-            </Link>
-            <Link href="/cargo" className="hover:text-black transition-colors">
-              Cargo
-            </Link>
-            <div className="h-4 w-px bg-slate-300" />
-            <button className="hover:text-[#0EA5E9] transition-colors flex items-center gap-2 text-slate-700">
-              <Globe className="w-3.5 h-3.5" />
-              <span>EN</span>
-            </button>
-          </div>
-        </div>
-
-        {/* --- LEVEL 2: MAIN BAR (Sticky) --- */}
-        <div
-          className={`
-            w-full h-24 lg:h-28 border-b bg-white transition-all duration-300
+      {/* --- LEVEL 1: MAIN NAVIGATION (Sticky Top) --- */}
+      {/* This sits ON TOP of the utility bar physically and logically */}
+      <header
+        className={`
+            sticky top-0 left-0 right-0 z-50 
+            w-full h-24 lg:h-28 bg-white transition-all duration-300
             ${
               isScrolled
-                ? "border-slate-200 shadow-xl shadow-slate-900/5"
-                : "border-slate-100"
+                ? "border-b border-slate-200 shadow-xl shadow-slate-900/5"
+                : "border-b border-slate-100"
             }
           `}
-        >
-          <div className="h-full px-6 lg:px-12 flex items-center justify-between max-w-[1800px] mx-auto">
-            {/* 1. BRAND */}
-            <Link href="/" className="flex items-center gap-4 group shrink-0">
-              <div className="w-14 h-14 bg-[#0EA5E9] flex items-center justify-center text-white shadow-[0_4px_20px_rgba(14,165,233,0.3)] group-hover:scale-105 transition-transform duration-300">
-                <Anchor className="w-8 h-8" />
-              </div>
-              <div className="flex flex-col justify-center h-full">
-                <span className="text-slate-900 font-black text-2xl lg:text-3xl leading-none uppercase tracking-tighter group-hover:text-[#0EA5E9] transition-colors">
-                  PORT OF {port?.shortName || "PORT"}
-                </span>
-                <span className="text-slate-400 text-xs font-bold uppercase tracking-[0.4em] mt-1">
-                  digital portal
-                </span>
-              </div>
-            </Link>
+      >
+        <div className="h-full px-6 lg:px-12 flex items-center justify-between max-w-[1800px] mx-auto">
+          {/* 1. BRAND */}
+          <Link href="/" className="flex items-center gap-4 group shrink-0">
+            <div className="w-14 h-14 bg-[#0EA5E9] flex items-center justify-center text-white shadow-[0_4px_20px_rgba(14,165,233,0.3)] group-hover:scale-105 transition-transform duration-300">
+              <Anchor className="w-8 h-8" />
+            </div>
+            <div className="flex flex-col justify-center h-full">
+              <span className="text-slate-900 font-black text-2xl lg:text-3xl leading-none uppercase tracking-tighter group-hover:text-[#0EA5E9] transition-colors">
+                PORT OF {port?.shortName || "PORT"}
+              </span>
+              <span className="text-slate-400 text-xs font-bold uppercase tracking-[0.4em] mt-1">
+                digital portal
+              </span>
+            </div>
+          </Link>
 
-            {/* 2. NAVIGATION */}
-            <nav className="hidden xl:flex items-center gap-8 h-full">
-              <Link
-                href="/"
-                className={`
+          {/* 2. NAVIGATION */}
+          <nav className="hidden xl:flex items-center gap-8 h-full">
+            <Link
+              href="/"
+              className={`
                     h-full flex items-center text-sm font-bold uppercase tracking-widest border-b-4 border-transparent transition-all
                     ${
                       pathname === "/"
@@ -128,16 +88,16 @@ export default function Header() {
                         : "text-slate-500 hover:text-slate-900 hover:border-black"
                     }
                   `}
-              >
-                Live
-              </Link>
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`
+            >
+              Live
+            </Link>
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`
                         h-full flex items-center text-sm font-bold uppercase tracking-widest border-b-4 transition-all
                         ${
                           isActive
@@ -145,41 +105,80 @@ export default function Header() {
                             : "text-slate-500 border-transparent hover:text-slate-900 hover:border-black"
                         }
                       `}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </nav>
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
 
-            {/* 3. ACTION AREA */}
-            <div className="flex items-center gap-6 pl-6 border-l border-slate-100 h-14">
-              <button className="hidden xl:flex items-center justify-center w-12 h-12 text-slate-400 hover:text-[#0EA5E9] transition-colors">
-                <Search className="w-5 h-5" />
-              </button>
+          {/* 3. ACTION AREA */}
+          <div className="flex items-center gap-6 pl-6 border-l border-slate-100 h-14">
+            <button className="hidden xl:flex items-center justify-center w-12 h-12 text-slate-400 hover:text-[#0EA5E9] transition-colors">
+              <Search className="w-5 h-5" />
+            </button>
 
-              <Link
-                href="/plan"
-                className="hidden md:flex items-center gap-3 bg-slate-900 text-white px-8 py-4 font-black text-sm uppercase tracking-widest hover:bg-[#0EA5E9] transition-colors shadow-lg shadow-slate-900/10"
-              >
-                <span>Plan Trip</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
+            <Link
+              href="/plan"
+              className="hidden md:flex items-center gap-3 bg-slate-900 text-white px-8 py-4 font-black text-sm uppercase tracking-widest hover:bg-[#0EA5E9] transition-colors shadow-lg shadow-slate-900/10"
+            >
+              <span>Plan Trip</span>
+              <ChevronRight className="w-4 h-4" />
+            </Link>
 
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="xl:hidden p-2 text-slate-900 hover:text-[#0EA5E9] transition-colors"
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-8 h-8" />
-                ) : (
-                  <Menu className="w-8 h-8" />
-                )}
-              </button>
-            </div>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="xl:hidden p-2 text-slate-900 hover:text-[#0EA5E9] transition-colors"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-8 h-8" />
+              ) : (
+                <Menu className="w-8 h-8" />
+              )}
+            </button>
           </div>
         </div>
       </header>
+
+      {/* --- LEVEL 2: UTILITY BAR (Static - Below Header) --- */}
+      {/* This is Z-40 so it slides BEHIND the header when scrolling up */}
+      <div className="relative z-40 bg-slate-50 border-b border-slate-200 h-12 flex items-center justify-between px-6 lg:px-12">
+        <div className="flex items-center gap-8 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
+          {/* Wind Widget */}
+          <div className="flex items-center gap-2 hover:text-[#0EA5E9] cursor-pointer transition-colors">
+            <Wind className="w-3.5 h-3.5 text-slate-400" />
+            <span>24km/h NNE</span>
+          </div>
+
+          {/* SEPARATOR */}
+          <div className="w-px h-3 bg-slate-300" />
+
+          {/* SHARP TECH STATUS */}
+          <div className="flex items-center gap-3 text-emerald-600">
+            {/* Square Pulsing Indicator */}
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-none bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-none bg-emerald-500"></span>
+            </span>
+            <span className="font-bold">Service Normal</span>
+          </div>
+        </div>
+
+        {/* Right Links */}
+        <div className="hidden md:flex items-center gap-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
+          <Link href="/contact" className="hover:text-black transition-colors">
+            Contact
+          </Link>
+          <Link href="/cargo" className="hover:text-black transition-colors">
+            Cargo
+          </Link>
+          <div className="h-4 w-px bg-slate-300" />
+          <button className="hover:text-[#0EA5E9] transition-colors flex items-center gap-2 text-slate-700">
+            <Globe className="w-3.5 h-3.5" />
+            <span>EN</span>
+          </button>
+        </div>
+      </div>
 
       {/* --- MOBILE DRAWER --- */}
       <div

@@ -1,197 +1,234 @@
 "use client";
 
 import {
-  Ticket,
   Calendar,
   Users,
-  Car,
   Search,
   Ship,
-  ArrowUpRight,
-  CheckCircle2,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Anchor,
 } from "lucide-react";
-import Link from "next/link";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
 
 export default function TicketOperators() {
+  const operators = [
+    {
+      name: "Blue Star Ferries",
+      logo: null,
+      logoText: "BLUE STAR",
+      routes: "Cyclades / Dodecanese",
+      bg: "bg-[#004C97]",
+    },
+    {
+      name: "Minoan Lines",
+      logo: null,
+      logoText: "MINOAN",
+      routes: "Crete / Italy",
+      bg: "bg-[#E30613]",
+    },
+    {
+      name: "Hellenic Seaways",
+      logo: null,
+      logoText: "HELLENIC SEAWAYS",
+      routes: "Saronic / Sporades",
+      bg: "bg-[#0057B8]",
+    },
+    {
+      name: "Attica Group",
+      logo: null,
+      logoText: "ATTICA GROUP",
+      routes: "Parent Company",
+      bg: "bg-[#8A1538]",
+    },
+    {
+      name: "Fast Ferries",
+      logo: null,
+      logoText: "FAST FERRIES",
+      routes: "Andros / Tinos / Mykonos",
+      bg: "bg-[#D6001C]",
+    },
+    {
+      name: "Saronic Ferries",
+      logo: null,
+      logoText: "SARONIC",
+      routes: "Aegina / Poros",
+      bg: "bg-[#00AEEF]",
+    },
+  ];
+
   return (
-    <section className="w-full bg-slate-50 border-b border-slate-200 py-24 px-6">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-        {/* --- LEFT COL: BOOKING ENGINE (The Tool) --- */}
-        <div className="lg:col-span-5">
-          <div className="bg-white border border-slate-200 p-8 lg:p-12 h-full flex flex-col relative overflow-hidden group hover:border-[#0EA5E9] transition-colors duration-300">
-            {/* Header */}
-            <div className="flex items-center gap-4 mb-8">
-              <div className="p-3 bg-[#0EA5E9] text-white">
-                <Ticket className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter leading-none">
-                  Reservation <br /> System
-                </h3>
-              </div>
+    <section className="w-full bg-slate-50 border-b border-slate-200 py-24 px-6 overflow-hidden">
+      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+        {/* --- LEFT COL: MINIMAL BOOKING ENGINE --- */}
+        <div className="lg:col-span-4 flex flex-col justify-center">
+          <div className="bg-white p-10 shadow-2xl shadow-slate-200/50 border-l-4 border-[#0EA5E9]">
+            {/* Minimal Header */}
+            <div className="mb-10">
+              <span className="text-[#0EA5E9] font-mono text-xs font-bold uppercase tracking-[0.3em] mb-2 block">
+                Ticketing
+              </span>
+              <h3 className="text-3xl font-black text-slate-900 uppercase tracking-tighter leading-none">
+                Start Your <br /> Journey
+              </h3>
             </div>
 
-            <p className="text-slate-500 text-sm mb-8 leading-relaxed">
-              Official ticketing gateway for all scheduled departures. Real-time
-              availability for passengers and vehicles.
-            </p>
-
-            {/* Form Interface */}
-            <div className="space-y-4 mt-auto">
-              {/* Destination */}
-              <div className="relative">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 absolute top-3 left-4">
-                  Destination
-                </label>
+            {/* Premium Form Interface */}
+            <div className="space-y-8">
+              {/* Destination Input */}
+              <div className="group relative">
                 <input
                   type="text"
-                  placeholder="SELECT PORT (e.g. SYROS)"
-                  className="w-full h-16 pt-6 pb-2 px-4 bg-slate-50 border border-slate-200 text-slate-900 font-bold uppercase placeholder:text-slate-300 focus:outline-none focus:border-[#0EA5E9] transition-colors rounded-none"
+                  placeholder="WHERE TO?"
+                  className="w-full h-14 bg-transparent border-b-2 border-slate-200 text-xl font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-[#0EA5E9] transition-all uppercase px-0"
                 />
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-focus-within:opacity-100 transition-opacity">
+                  <Search className="w-5 h-5 text-[#0EA5E9]" />
+                </div>
               </div>
 
               {/* Date & Pax Row */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="relative">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 absolute top-3 left-4">
-                    Date
+              <div className="grid grid-cols-2 gap-8 pt-2">
+                <div className="group relative">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">
+                    Departing
                   </label>
-                  <div className="w-full h-16 pt-6 pb-2 px-4 bg-slate-50 border border-slate-200 text-slate-900 font-bold uppercase flex items-center justify-between cursor-pointer hover:border-slate-300">
-                    <span>Today</span>
+                  <div className="flex items-center justify-between border-b-2 border-slate-200 pb-2 cursor-pointer group-hover:border-slate-400 transition-colors">
+                    <span className="text-sm font-bold text-slate-900 uppercase">
+                      Select Date
+                    </span>
                     <Calendar className="w-4 h-4 text-slate-400" />
                   </div>
                 </div>
-                <div className="relative">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 absolute top-3 left-4">
-                    Pax
+
+                <div className="group relative">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">
+                    Passengers
                   </label>
-                  <div className="w-full h-16 pt-6 pb-2 px-4 bg-slate-50 border border-slate-200 text-slate-900 font-bold uppercase flex items-center justify-between cursor-pointer hover:border-slate-300">
-                    <span>1 Adult</span>
+                  <div className="flex items-center justify-between border-b-2 border-slate-200 pb-2 cursor-pointer group-hover:border-slate-400 transition-colors">
+                    <span className="text-sm font-bold text-slate-900 uppercase">
+                      1 Traveler
+                    </span>
                     <Users className="w-4 h-4 text-slate-400" />
                   </div>
                 </div>
               </div>
 
-              {/* Vehicle Toggle */}
-              <button className="w-full h-12 border border-slate-200 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 hover:border-slate-400 transition-colors bg-white">
-                <Car className="w-4 h-4" />
-                <span>Add Vehicle</span>
-              </button>
-
-              {/* Submit */}
-              <button className="w-full h-16 bg-[#0EA5E9] text-white font-black uppercase tracking-widest text-sm hover:bg-slate-900 transition-colors flex items-center justify-center gap-3">
-                <span>Search Crossings</span>
-                <Search className="w-4 h-4" />
+              {/* Action Button */}
+              <button className="w-full h-16 bg-slate-900 text-white font-black uppercase tracking-widest text-xs hover:bg-[#0EA5E9] transition-colors flex items-center justify-between px-8 mt-8 group">
+                <span>Check Availability</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
-
-            {/* Decorative Corner Accent */}
-            <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-slate-100 group-hover:border-[#0EA5E9] transition-colors duration-300" />
           </div>
         </div>
 
-        {/* --- RIGHT COL: OPERATOR DIRECTORY (The Authority) --- */}
-        <div className="lg:col-span-7">
-          <div className="flex items-center gap-4 mb-10">
-            <div className="h-px w-12 bg-[#0EA5E9]" />
-            <span className="text-[#0EA5E9] font-mono text-xs font-bold uppercase tracking-[0.3em]">
-              Strategic Partners
-            </span>
+        {/* --- RIGHT COL: OPERATOR SWIPER --- */}
+        <div className="lg:col-span-8 relative">
+          {/* Section Title */}
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <h2 className="text-4xl font-black text-slate-900 tracking-tighter uppercase">
+                Authorized <span className="text-[#0EA5E9]">Carriers</span>
+              </h2>
+            </div>
+            {/* Custom Nav Buttons for Swiper */}
+            <div className="hidden md:flex gap-2">
+              <button className="swiper-prev-btn w-14 h-14 border border-slate-200 flex items-center justify-center hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all">
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button className="swiper-next-btn w-14 h-14 border border-slate-200 flex items-center justify-center hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all">
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
           </div>
 
-          <h2 className="text-4xl font-black text-slate-900 tracking-tighter uppercase mb-12">
-            Authorized <span className="text-[#0EA5E9]">Carriers</span>
-          </h2>
+          {/* The Swiper */}
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            spaceBetween={24}
+            slidesPerView={1.2}
+            navigation={{
+              nextEl: ".swiper-next-btn",
+              prevEl: ".swiper-prev-btn",
+            }}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            breakpoints={{
+              640: { slidesPerView: 2.2 },
+              1024: { slidesPerView: 2.8 }, // Show nearly 3 cards
+            }}
+            className="w-full h-[500px]"
+          >
+            {operators.map((op, idx) => (
+              <SwiperSlide key={idx} className="h-full">
+                <div className="h-full bg-white border border-slate-200 flex flex-col justify-between group hover:border-[#0EA5E9] hover:shadow-2xl hover:shadow-slate-200 transition-all duration-300 cursor-pointer relative overflow-hidden">
+                  {/* TOP: Brand Color Stripe */}
+                  <div className={`h-2 w-full ${op.bg}`} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Operator Cards */}
-            {[
-              {
-                name: "Blue Star Ferries",
-                type: "Conventional / High Speed",
-                routes: "Cyclades, Dodecanese",
-                status: "Active",
-              },
-              {
-                name: "Seajets",
-                type: "High Speed Catamarans",
-                routes: "Cyclades, Crete",
-                status: "Active",
-              },
-              {
-                name: "Minoan Lines",
-                type: "Cruise Ferries",
-                routes: "Crete (Heraklion)",
-                status: "Active",
-              },
-              {
-                name: "Hellenic Seaways",
-                type: "High Speed / Aero",
-                routes: "Saronic, Sporades",
-                status: "Active",
-              },
-              {
-                name: "Fast Ferries",
-                type: "Conventional",
-                routes: "Andros, Tinos, Mykonos",
-                status: "Scheduled",
-              },
-              {
-                name: "Saronic Ferries",
-                type: "Commuter",
-                routes: "Aegina, Poros",
-                status: "Active",
-              },
-            ].map((op, idx) => (
-              <div
-                key={idx}
-                className="bg-white border border-slate-200 p-6 flex items-start justify-between group hover:border-[#0EA5E9] transition-all cursor-pointer"
-              >
-                <div>
-                  <h4 className="text-lg font-black text-slate-900 uppercase tracking-tighter mb-1 group-hover:text-[#0EA5E9] transition-colors">
-                    {op.name}
-                  </h4>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">
-                    {op.type}
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <Ship className="w-3 h-3 text-slate-300" />
-                    <span className="text-xs text-slate-600 font-mono uppercase truncate max-w-[150px]">
-                      {op.routes}
+                  {/* LOGO AREA (Centered & Large) */}
+                  <div className="flex-1 flex flex-col items-center justify-center p-10 relative z-10">
+                    {/* Background Index Number */}
+                    <span className="absolute top-4 right-4 text-8xl font-black text-slate-50 leading-none select-none z-0">
+                      {idx + 1}
                     </span>
+
+                    {op.logo ? (
+                      // Image Logo Logic (Kept for future safety)
+                      <div className="relative w-48 h-24 z-10 transition-transform duration-500 group-hover:scale-110">
+                        <Image
+                          src={op.logo}
+                          alt={op.name}
+                          fill
+                          className="object-contain"
+                          unoptimized
+                        />
+                      </div>
+                    ) : (
+                      // Text Fallback (Active for all now)
+                      <div className="z-10 text-center">
+                        <Anchor className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                        <h4 className="text-4xl font-black text-slate-300 uppercase tracking-tighter leading-none group-hover:text-slate-900 transition-colors">
+                          {op.logoText}
+                        </h4>
+                      </div>
+                    )}
                   </div>
-                </div>
 
-                <div className="flex flex-col items-end gap-2">
-                  {op.status === "Active" ? (
-                    <div className="flex items-center gap-1.5 px-2 py-1 bg-green-50 border border-green-100">
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-none animate-pulse" />
-                      <span className="text-[9px] font-bold text-green-700 uppercase tracking-wider">
-                        Online
+                  {/* BOTTOM: Info Section */}
+                  <div className="p-8 border-t border-slate-100 bg-slate-50/50 group-hover:bg-white transition-colors">
+                    <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight mb-2 group-hover:text-[#0EA5E9] transition-colors leading-none">
+                      {op.name}
+                    </h4>
+
+                    <div className="flex items-center gap-3 text-slate-500 mb-6">
+                      <Ship className="w-4 h-4 text-[#0EA5E9]" />
+                      <span className="text-xs font-mono font-bold uppercase tracking-wide">
+                        {op.routes}
                       </span>
                     </div>
-                  ) : (
-                    <div className="flex items-center gap-1.5 px-2 py-1 bg-slate-50 border border-slate-100">
-                      <div className="w-1.5 h-1.5 bg-slate-400 rounded-none" />
-                      <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">
-                        Sched
-                      </span>
+
+                    {/* View Details Link */}
+                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 group-hover:text-slate-900 transition-colors">
+                      <span>View Fleet</span>
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </div>
-                  )}
-                  <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover:text-[#0EA5E9] transition-colors mt-auto" />
+                  </div>
+
+                  {/* Hover Bar Bottom */}
+                  <div className="absolute bottom-0 left-0 w-full h-1.5 bg-[#0EA5E9] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </div>
-              </div>
+              </SwiperSlide>
             ))}
-          </div>
-
-          <div className="mt-8 flex justify-end">
-            <Link
-              href="/operators"
-              className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-[#0EA5E9] flex items-center gap-2 transition-colors"
-            >
-              View All 14 Operators <ArrowUpRight className="w-4 h-4" />
-            </Link>
-          </div>
+          </Swiper>
         </div>
       </div>
     </section>

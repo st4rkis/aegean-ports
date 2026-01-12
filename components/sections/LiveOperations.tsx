@@ -1,14 +1,12 @@
 "use client";
 
-import { Video, ArrowRight } from "lucide-react";
+import { Video, ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
 
 export default function LiveOperations() {
   return (
     <section className="w-full bg-white border-b border-slate-200 py-20 px-6">
       <div className="max-w-[1600px] mx-auto">
-        {" "}
-        {/* Fixed max-w-400 typo to standard max-w-[1600px] based on context */}
         {/* Section Header */}
         <div className="flex items-end justify-between mb-12">
           <div className="flex items-center gap-4 mb-4">
@@ -22,12 +20,24 @@ export default function LiveOperations() {
             Live Feed • UTC +2
           </div>
         </div>
+
         {/* --- MAIN CAMERA FEED (Full Width) --- */}
         <div className="flex flex-col gap-6">
-          {/* Camera Frame - No Shadow, Sharp Corners, Flat Border */}
-          <div className="relative aspect-video w-full bg-slate-100 border border-slate-200 group overflow-hidden rounded-none">
-            {/* UPDATED: Placeholder for Video Feed using local image */}
+          {/* Camera Frame - STATIC CONTAINER */}
+          <div className="relative aspect-video w-full bg-slate-900 border border-slate-200 overflow-hidden rounded-none cursor-pointer">
+            {/* 1. Background Image (Static) */}
             <div className="absolute inset-0 bg-[url('/images/port-cam-placeholder.jpg')] bg-cover bg-center" />
+
+            {/* 2. DARK OVERLAY (Darkened to 70%) */}
+            <div className="absolute inset-0 bg-slate-900/70" />
+
+            {/* 3. PLAY BUTTON (HOVER EFFECT ADDED HERE) */}
+            <div className="absolute inset-0 flex items-center justify-center z-20">
+              {/* Added hover:bg-[#0EA5E9] and hover:border-[#0EA5E9] and transition */}
+              <div className="w-20 h-20 md:w-24 md:h-24 bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-[#0EA5E9] hover:border-[#0EA5E9]">
+                <Play className="w-8 h-8 md:w-10 md:h-10 text-white fill-white ml-1" />
+              </div>
+            </div>
 
             {/* Overlay UI: Top Left Label */}
             <div className="absolute top-0 left-0 flex items-center gap-3 bg-white border-r border-b border-slate-200 px-4 py-2 z-10">
@@ -38,14 +48,14 @@ export default function LiveOperations() {
             </div>
 
             {/* Overlay UI: Big "LIVE" Text */}
-            <div className="absolute bottom-6 right-6 pointer-events-none">
+            <div className="absolute bottom-6 right-6 pointer-events-none z-10">
               <span className="text-6xl md:text-8xl font-black text-white/10 select-none tracking-tighter">
                 LIVE
               </span>
             </div>
 
-            {/* Scanning Line Effect (Optional "Tech" feel) */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-[10%] w-full animate-[scan_4s_linear_infinite] pointer-events-none opacity-50" />
+            {/* Scanning Line Effect */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0EA5E9]/10 to-transparent h-[15%] w-full animate-[scan_3s_linear_infinite] pointer-events-none" />
           </div>
 
           {/* View More Action */}
@@ -59,10 +69,10 @@ export default function LiveOperations() {
 
             <Link
               href="/cameras"
-              className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-slate-900 hover:text-[#0EA5E9] transition-colors"
+              className="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-slate-900 hover:text-[#0EA5E9] transition-colors"
             >
               <span>View All Sector Cameras</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

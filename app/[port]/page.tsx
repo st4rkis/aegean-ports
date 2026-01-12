@@ -28,15 +28,15 @@ export default async function PortHome({ params }: Props) {
       <div>
         <HeroDashboard />
       </div>
-      <UsefulServices />
-
       <LiveOperations />
+
+      <UsefulServices />
+      <TicketOperators />
+
       <GettingTo />
 
       {/* Suggested Order: Directions usually come before Facilities, but this order works too */}
       {/* <TerminalAccessGuide /> */}
-
-      <TicketOperators />
 
       <FacilitiesLocal />
 
