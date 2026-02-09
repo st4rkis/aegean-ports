@@ -4,10 +4,12 @@ import { getPortByDomain } from "@/lib/ports.config";
 
 export function proxy(request: NextRequest) {
   const host = request.headers.get("host");
-  const port = getPortByDomain(host);
+  let port = getPortByDomain(host);
 
-  // If domain is not mapped → let Next.js continue normally
-  if (!port) return NextResponse.next();
+  // If domain is not mapped → default to jmk
+  if (!port) {
+    port = { key: "jmk" } as any;
+  }
 
   const url = request.nextUrl.clone();
   const path = url.pathname;
